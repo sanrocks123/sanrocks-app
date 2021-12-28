@@ -36,8 +36,10 @@ dependencies {
 	implementation "com.fasterxml.jackson.core:jackson-databind:2.9.3"
 	implementation "com.fasterxml.jackson.core:jackson-annotations:2.9.3"
 	implementation "com.fasterxml.jackson.core:jackson-core:2.9.3"
-	
-   	implementation "io.springfox:springfox-boot-starter:3.0.0"
+
+	testImplementation 'org.slf4j:slf4j-log4j12:1.7.30'
+
+	implementation "io.springfox:springfox-boot-starter:3.0.0"
 	implementation "io.springfox:springfox-swagger-ui:3.0.0"
 
 	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
