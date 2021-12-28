@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Gradle Build
+      run: ./gradlew clean build
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag sanrocks123/trading-bot:$(date +%s)
