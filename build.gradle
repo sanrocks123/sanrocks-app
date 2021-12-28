@@ -49,7 +49,7 @@ dependencies {
 jar {
 	manifest {
 		attributes(
-				'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+				'Class-Path': configurations.default.collect { it.getName() }.join(' '),
 				'Main-Class': 'bux.tradingbot.main.BuxTradingBotServiceSelfHostApp'
 		)
 	}
