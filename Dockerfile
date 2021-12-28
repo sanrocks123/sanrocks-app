@@ -20,6 +20,9 @@ WORKDIR $SERVICE_HOME
 RUN mkdir -p $LIB
 RUN mkdir -p $CONFIG
 
+RUN pwd
+RUN find .
+
 COPY ./build/lib $SERVICE_HOME/$LIB
 COPY ./build/scripts $SERVICE_SCRIPTS
 
