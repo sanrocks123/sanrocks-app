@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: run command
+      run: chmod +x gradlew
     - name: Gradle Build
       run: ./gradlew clean build
     - name: Build the Docker image
