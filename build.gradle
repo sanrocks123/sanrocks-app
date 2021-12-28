@@ -46,6 +46,15 @@ dependencies {
    	testCompile  "org.jmockit:jmockit:1.9"
 	}
 
+jar {
+	manifest {
+		attributes(
+				'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+				'Main-Class': 'bux.tradingbot.main.BuxTradingBotServiceSelfHostApp'
+		)
+	}
+}
+
 task copyToLib(type: Copy) {
 	from configurations.default
 	into "$buildDir/lib"
