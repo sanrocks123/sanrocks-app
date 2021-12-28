@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="BuxTradingBotServiceSelfHostApp" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" nameIsGenerated="true">
+    <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+    <envs>
+      <env name="PROFILE" value="localhost" />
+      <env name="LOG_LEVEL" value="INFO" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="bux.tradingbot.main.BuxTradingBotServiceSelfHostApp" />
+    <module name="bux-trading-bot.main" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="bux.tradingbot.main.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

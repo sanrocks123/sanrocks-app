@@ -1,0 +1,64 @@
+/**
+*	Description	: Gradle build file 
+*	Author		: Sanjeev
+*/
+
+buildscript{
+	repositories{
+        mavenCentral()
+    }
+    
+}
+
+apply plugin : 'application'
+
+mainClassName = 'bux.tradingbot.main.BuxTradingBotServiceSelfHostApp'
+version = '1.0'
+
+repositories {
+		mavenCentral()    
+	}
+
+sourceCompatibility=1.11
+targetCompatibility=1.11
+
+configurations {
+	testCompile
+}
+
+dependencies {
+
+	implementation "org.springframework.boot:spring-boot-starter-web:2.4.3"
+	implementation "org.springframework:spring-websocket:5.3.14"
+	implementation "org.springframework:spring-messaging:5.3.14"
+
+   	implementation "org.json:json:20171018"
+	implementation "com.fasterxml.jackson.core:jackson-databind:2.9.3"
+	implementation "com.fasterxml.jackson.core:jackson-annotations:2.9.3"
+	implementation "com.fasterxml.jackson.core:jackson-core:2.9.3"
+	
+   	implementation "io.springfox:springfox-boot-starter:3.0.0"
+	implementation "io.springfox:springfox-swagger-ui:3.0.0"
+
+	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+
+	testCompile  "junit:junit:4.12"
+   	testCompile  "org.jmockit:jmockit:1.9"
+	}
+
+task copyToLib(type: Copy) {
+	from configurations.default
+	into "$buildDir/lib"
+}
+
+task copyJar(type: Copy) {
+    	from "$buildDir/libs"
+    	into "$buildDir/lib"    
+	}
+
+task copyDockerFile(type: Copy) {
+    	from "./Dockerfile"
+    	into "$buildDir"
+   }
+
+build.dependsOn(copyToLib, copyDockerFile, copyJar)
