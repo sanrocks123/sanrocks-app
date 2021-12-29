@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="BuxTradingBotServiceSelfHostApp" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" nameIsGenerated="true">
-    <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+    <option name="ALTERNATIVE_JRE_PATH" value="JAVA_11" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <envs>
       <env name="PROFILE" value="localhost" />
       <env name="LOG_LEVEL" value="INFO" />
