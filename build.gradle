@@ -19,8 +19,8 @@ repositories {
 		mavenCentral()    
 	}
 
-sourceCompatibility=1.8
-targetCompatibility=1.8
+sourceCompatibility=1.11
+targetCompatibility=1.11
 
 configurations {
 	testCompile
@@ -37,8 +37,6 @@ dependencies {
 	implementation "com.fasterxml.jackson.core:jackson-annotations:2.9.3"
 	implementation "com.fasterxml.jackson.core:jackson-core:2.9.3"
 
-	//implementation 'org.slf4j:slf4j-log4j12:1.7.30'
-
 	implementation "io.springfox:springfox-boot-starter:3.0.0"
 	implementation "io.springfox:springfox-swagger-ui:3.0.0"
 
@@ -51,25 +49,30 @@ dependencies {
 jar {
 	manifest {
 		attributes(
-				'Class-Path': configurations.default.collect { it.getName() }.join(' '),
+				'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
 				'Main-Class': 'bux.tradingbot.main.BuxTradingBotServiceSelfHostApp'
 		)
 	}
 }
 
-task copyToLib(type: Copy) {
-	from configurations.default
-	into "$buildDir/lib"
-}
+tasks.named('build'){
+	doLast{
+		println "Copying deps -> lib..."
+		copy{
+			from configurations.compileClasspath
+			into "$buildDir/lib"
+		}
 
-task copyJar(type: Copy) {
-    	from "$buildDir/libs"
-    	into "$buildDir/lib"    
+		println "Copying Dockerfile to build"
+		copy{
+			from "./Dockerfile"
+			into "$buildDir"
+		}
+
+		println "Copying libs -> lib..."
+		copy{
+			from "$buildDir/libs"
+			into "$buildDir/lib"
+		}
 	}
-
-task copyDockerFile(type: Copy) {
-    	from "./Dockerfile"
-    	into "$buildDir"
-   }
-
-build.dependsOn(copyToLib, copyDockerFile, copyJar)
+}
