@@ -1,6 +1,7 @@
 package bux.tradingbot.util;
 
 import bux.tradingbot.domain.Product;
+import bux.tradingbot.repository.ProductRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -8,10 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Java Source DefaultProductLoader created on 12/23/2021
@@ -52,7 +57,7 @@ public class DefaultProductLoader {
             this.subscriptions.add(String.format("trading.product.%s", p.getProductId()));
         }
 
-        log.info("default products loaded {}", new JSONObject(this.products).toString(4));
+        log.info("default products loaded, size: [{}]", products.length());
     }
 
     /**

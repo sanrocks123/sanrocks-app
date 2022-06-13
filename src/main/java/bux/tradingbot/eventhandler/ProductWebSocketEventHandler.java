@@ -59,7 +59,7 @@ public class ProductWebSocketEventHandler extends Endpoint {
             public void onMessage(final String message) {
 
                 JSONObject jsonMessage = new JSONObject(message);
-                log.trace("onMessage - {}", jsonMessage.toString());
+                log.debug("onMessage - {}", jsonMessage.toString());
 
                 logSubscriptionSuccess(jsonMessage);
 

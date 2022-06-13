@@ -2,6 +2,7 @@ package bux.tradingbot.eventhandler;
 
 import bux.tradingbot.domain.Product;
 import bux.tradingbot.domain.ProductQuoteEvent;
+import bux.tradingbot.repository.ProductQuoteEventReactiveRepository;
 import bux.tradingbot.util.DefaultProductLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,10 @@ public class ProductQuoteMessageEventHandler {
     @Autowired
     private ProductPriceUpdateEventHandler priceUpdateEventHandler;
 
+    @Autowired
+    private ProductQuoteEventReactiveRepository productQuoteEventRepository;
+
+
     /**
      * product update price is thread safe as products map is backed by ConcurrentHashMap
      *
@@ -42,6 +47,8 @@ public class ProductQuoteMessageEventHandler {
 
             return productTrades.getProducts().computeIfPresent(securityId, (k, v) -> {
                 v.setCurrentPrice(new BigDecimal(currentPrice));
+                pqe.getBody().put("securityName", v.getProductName());
+                productQuoteEventRepository.save(pqe).single().subscribe();
                 return priceUpdateEventHandler.onPriceUpdate(v);
             });
         }

@@ -1,7 +1,11 @@
 package bux.tradingbot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
+import lombok.Data;
 import org.json.JSONObject;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,12 +21,15 @@ import java.util.concurrent.*;
  * @email : sanrocks123@gmail.com
  */
 
+@Data
+@Document
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Product implements Serializable {
 
     private static final long SerialVersionUID = 10l;
     private static final int CLOSING_POSITION_MARGIN = 5;
 
+    @Id
     private String productId;
     private String productName;
     private BigDecimal currentPrice;

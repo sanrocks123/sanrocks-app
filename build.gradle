@@ -1,78 +1,99 @@
 /**
-*	Description	: Gradle build file 
-*	Author		: Sanjeev
-*/
+ * 	Description	: Gradle build file
+ * 	Author		: Sanjeev
+ */
 
-buildscript{
-	repositories{
+buildscript {
+    repositories {
         mavenCentral()
     }
-    
+
 }
 
-apply plugin : 'application'
+apply plugin: 'application'
 
 mainClassName = 'bux.tradingbot.main.BuxTradingBotServiceSelfHostApp'
 version = '1.0'
 
 repositories {
-		mavenCentral()    
-	}
+    mavenCentral()
+}
 
-sourceCompatibility=1.11
-targetCompatibility=1.11
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 configurations {
-	testCompile
+    testCompile
 }
 
 dependencies {
 
-	implementation "org.springframework.boot:spring-boot-starter-web:2.4.3"
-	implementation "org.springframework:spring-websocket:5.3.14"
-	implementation "org.springframework:spring-messaging:5.3.14"
+    implementation "org.springframework.boot:spring-boot-starter-web:$springboot"
+    implementation 'org.springframework:spring-websocket:5.3.20'
+    implementation 'org.springframework:spring-messaging:5.3.20'
 
-   	implementation "org.json:json:20171018"
-	implementation "com.fasterxml.jackson.core:jackson-databind:2.9.3"
-	implementation "com.fasterxml.jackson.core:jackson-annotations:2.9.3"
-	implementation "com.fasterxml.jackson.core:jackson-core:2.9.3"
+    implementation 'org.json:json:20220320'
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jackson"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson"
+    implementation "com.fasterxml.jackson.core:jackson-core:$jackson"
 
-	implementation "io.springfox:springfox-boot-starter:3.0.0"
-	implementation "io.springfox:springfox-swagger-ui:3.0.0"
+    implementation "io.springfox:springfox-boot-starter:$springfox"
+    implementation "io.springfox:springfox-swagger-ui:$springfox"
 
-	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+    implementation 'commons-io:commons-io:2.11.0'
 
-	testCompile  "junit:junit:4.12"
-   	testCompile  "org.jmockit:jmockit:1.9"
-	}
+    compileOnly "org.projectlombok:lombok:$lombok"
+    annotationProcessor "org.projectlombok:lombok:$lombok"
 
-jar {
-	manifest {
-		attributes(
-				'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
-				'Main-Class': 'bux.tradingbot.main.BuxTradingBotServiceSelfHostApp'
-		)
-	}
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
+
+
+    testImplementation "org.jmockit:jmockit:1.49"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springboot"
+
+    testCompileOnly "org.projectlombok:lombok:$lombok"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombok"
+
 }
 
-tasks.named('build'){
-	doLast{
-		println "Copying deps -> lib..."
-		copy{
-			from configurations.compileClasspath
-			into "$buildDir/lib"
-		}
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
+                'Main-Class': 'bux.tradingbot.main.BuxTradingBotServiceSelfHostApp'
+        )
+    }
+}
 
-		println "Copying Dockerfile to build"
-		copy{
-			from "./Dockerfile"
-			into "$buildDir"
-		}
+tasks.named('build') {
+    doLast {
+        println "Copying deps -> lib..."
+        copy {
+            from configurations.compileClasspath
+            into "$buildDir/lib"
+        }
 
-		println "Copying libs -> lib..."
-		copy{
-			from "$buildDir/libs"
-			into "$buildDir/lib"
-		}
-	}
+        println "Copying Dockerfile to build"
+        copy {
+            from "./Dockerfile"
+            into "$buildDir"
+        }
+
+        println "Copying libs -> lib..."
+        copy {
+            from "$buildDir/libs"
+            into "$buildDir/lib"
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+    dependsOn 'cleanTest'
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }

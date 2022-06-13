@@ -1,7 +1,11 @@
 package bux.tradingbot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import org.json.JSONObject;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -15,14 +19,16 @@ import java.util.Map;
  * @email : sanrocks123@gmail.com
  */
 
+@Data
+@Document
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductQuoteEvent implements Serializable {
-
-    private static final long SerialVersionUID = 10l;
 
     private static final String CONNECT_CONNECTED_EVENT = "connect.connected";
     private static final String TRADING_QUOTE_EVENT = "trading.quote";
 
+    @Id
+    private String eventId;
     private String t = "";
     private Map<String, Object> body = new HashMap<>();
 
@@ -61,5 +67,4 @@ public class ProductQuoteEvent implements Serializable {
     public void setBody(Map<String, Object> body) {
         this.body = body;
     }
-
 }

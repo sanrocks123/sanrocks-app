@@ -8,7 +8,8 @@ log.path*
 bin*
 .setting*
 .classpath*
-
+.idea
+.DS_store
 
 # Log file
 *.log

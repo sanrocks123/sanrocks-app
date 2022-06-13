@@ -42,6 +42,7 @@ public class ProductEventServiceImpl implements ProductEventService {
     @Autowired
     private ProductQuoteMessageEventHandler eventHandler;
 
+
     /**
      * consumer threads to pick up events for processing
      */

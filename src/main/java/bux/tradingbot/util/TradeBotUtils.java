@@ -2,6 +2,7 @@ package bux.tradingbot.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -18,9 +19,8 @@ import java.io.InputStream;
  * @email : sanrocks123@gmail.com
  */
 
+@Slf4j
 public class TradeBotUtils {
-
-    private static final Logger log = LoggerFactory.getLogger(TradeBotUtils.class);
 
     public static final String SUBSCRIPTION = "/subscriptions/me";
     public static final String BUY = "/core/21/users/me/trades";

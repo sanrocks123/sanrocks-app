@@ -1,0 +1,11 @@
+#
+# Description	: bux trading bot development service properties
+# Author		: Sanjeev
+# environment   : localhost
+
+bux:
+  rtf-server: ws://localhost:8080
+
+logging:
+  level:
+    bux.tradingbot: INFO

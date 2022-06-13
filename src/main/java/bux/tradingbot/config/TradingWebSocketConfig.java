@@ -18,6 +18,7 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Java Source TradingWebSocketConfig created on 12/25/2021
@@ -54,7 +55,7 @@ public class TradingWebSocketConfig {
         this.url = String.format("%s%s", this.url.trim(), TradeBotUtils.SUBSCRIPTION);
         this.token = String.format("Bearer %s", this.token);
 
-        connect(eventHandler);
+        new Thread(() -> connect(eventHandler), "connectSocket").start();
     }
 
     /**
@@ -76,6 +77,12 @@ public class TradingWebSocketConfig {
 
         } catch (Exception e) {
             log.error("socket connect error {}", e.getMessage());
+            try {
+                log.info("will retry after 5 minutes...");
+                TimeUnit.MINUTES.sleep(5);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
             connect(eventHandler);
         }
     }
