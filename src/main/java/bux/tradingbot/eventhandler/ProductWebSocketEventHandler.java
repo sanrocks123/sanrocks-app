@@ -9,10 +9,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.websocket.CloseReason;
-import javax.websocket.Endpoint;
-import javax.websocket.EndpointConfig;
-import javax.websocket.Session;
+import javax.websocket.*;
 
 /**
  * Java Source ProductWebSocketEventHandler created on 12/24/2021
@@ -53,36 +50,32 @@ public class ProductWebSocketEventHandler extends Endpoint {
         log.info("onOpen socket connection established");
 
         this.session = session;
-        this.session.addMessageHandler(new javax.websocket.MessageHandler.Whole<String>() {
+        this.session.addMessageHandler((MessageHandler.Whole<String>) message -> {
 
-            @Override
-            public void onMessage(final String message) {
+            JSONObject jsonMessage = new JSONObject(message);
+            log.debug("onMessage - {}", jsonMessage.toString());
 
-                JSONObject jsonMessage = new JSONObject(message);
-                log.debug("onMessage - {}", jsonMessage.toString());
+            logSubscriptionSuccess(jsonMessage);
 
-                logSubscriptionSuccess(jsonMessage);
+            ProductQuoteEvent pqe = null;
+            try {
+                pqe = TradeBotUtils.deserialize(message, ProductQuoteEvent.class);
 
-                ProductQuoteEvent pqe = null;
-                try {
-                    pqe = TradeBotUtils.deserialize(message, ProductQuoteEvent.class);
-
-                    if (pqe.isWebSocketConnectedEvent()) {
-                        log.info("WebSocket Connected - {}", new JSONObject(message).toString(4));
-                        subscribeDefaultProducts();
-                    }
-
-                    if (pqe.isTradingQuoteEvent())
-                        eventService.pushTradeQuoteEvent(pqe);
-
-                } catch (IllegalArgumentException e) {
-                    log.error("onMessage, error : ", e);
-                    eventService.pushError(pqe, e.getMessage());
-
-                } catch (Exception e) {
-                    log.error("onMessage, error : ", e);
-                    eventService.pushError(pqe, e.getMessage());
+                if (pqe.isWebSocketConnectedEvent()) {
+                    log.info("WebSocket Connected - {}", new JSONObject(message).toString(4));
+                    subscribeDefaultProducts();
                 }
+
+                if (pqe.isTradingQuoteEvent())
+                    eventService.pushTradeQuoteEvent(pqe);
+
+            } catch (IllegalArgumentException e) {
+                log.error("onMessage, error : ", e);
+                eventService.pushError(pqe, e.getMessage());
+
+            } catch (Exception e) {
+                log.error("onMessage, error : ", e);
+                eventService.pushError(pqe, e.getMessage());
             }
         });
     }
