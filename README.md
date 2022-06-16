@@ -21,10 +21,3 @@
         </ol>
     <li> view swagger api docs - <a href="http://localhost:1000/swagger-ui/">http://localhost:1000/swagger-ui/</a></li>
 </ol>
-
-<p>Todos</p>
-<ol>
-    <li>update docker build script to use tar compression</li>
-    <li>gradle file cleanup</li>
-    <li>implement reactive APIs using webflux library</li>
-</ol>

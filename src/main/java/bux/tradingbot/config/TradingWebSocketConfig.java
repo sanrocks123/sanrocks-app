@@ -78,7 +78,7 @@ public class TradingWebSocketConfig {
         } catch (Exception e) {
             log.error("socket connect error {}", e.getMessage());
             try {
-                log.info("will retry after 5 minutes...");
+                log.info("will retry after 5 mins...");
                 TimeUnit.MINUTES.sleep(5);
             } catch (InterruptedException ex) {
                 throw new RuntimeException(ex);

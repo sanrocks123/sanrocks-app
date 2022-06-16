@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
+import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class ProductQuoteController {
      */
     @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<ProductQuoteEvent> streamProducts() {
-        return productQuoteEventReactiveRepository.findAll();
+        return productQuoteEventReactiveRepository.findAll().delayElements(Duration.ofSeconds(0));
     }
 
     /**

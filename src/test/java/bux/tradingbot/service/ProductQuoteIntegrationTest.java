@@ -1,6 +1,5 @@
 package bux.tradingbot.service;
 
-
 import bux.tradingbot.domain.ProductQuoteEvent;
 import bux.tradingbot.main.BuxTradingBotServiceSelfHostApp;
 import lombok.extern.slf4j.Slf4j;
