@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 
+@Disabled
 @Slf4j
 @SpringBootTest(classes = BuxTradingBotServiceSelfHostApp.class)
 @ActiveProfiles("localhost")

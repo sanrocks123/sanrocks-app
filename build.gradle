@@ -97,7 +97,6 @@ tasks.named('build') {
 
 test {
     useJUnitPlatform()
-    dependsOn 'cleanTest'
     testLogging {
         events "passed", "skipped", "failed"
     }
