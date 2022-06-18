@@ -9,3 +9,4 @@ bux:
 logging:
   level:
     bux.tradingbot: INFO
+    org.springframework: INFO

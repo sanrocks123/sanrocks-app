@@ -33,6 +33,7 @@ dependencies {
     implementation 'org.springframework:spring-messaging:5.3.20'
 
     implementation 'org.json:json:20220320'
+    implementation 'com.google.code.gson:gson:2.9.0'
     implementation "com.fasterxml.jackson.core:jackson-databind:$jackson"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson"
     implementation "com.fasterxml.jackson.core:jackson-core:$jackson"
@@ -48,6 +49,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.7.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.7.0'
     implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
+
+    implementation 'com.graphql-java:graphql-java-tools:5.2.4'
+    implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
+    implementation "com.graphql-java:graphiql-spring-boot-starter:5.0.2"
 
 
     testImplementation "org.jmockit:jmockit:1.49"

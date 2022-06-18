@@ -16,8 +16,11 @@
     <li><code>export LOG_LEVEL="INFO"</code></li>
     <li>execute command </li>
         <ol>
-            <li>on windows console -> <code>gradlew clean build run</code></li>
-            <li>on linux console -> <code>./gradlew clean build run</code></li>
+            <li>on windows console -> <code>gradlew clean run</code></li>
+            <li>on linux console -> <code>./gradlew clean run</code></li>
         </ol>
     <li> view swagger api docs - <a href="http://localhost:1000/swagger-ui/">http://localhost:1000/swagger-ui/</a></li>
 </ol>
+
+<p>GraphQL Editor - /graphiql</p>
+

@@ -1,0 +1,3 @@
+type Query {
+    companyById(id: ID): Company
+}
