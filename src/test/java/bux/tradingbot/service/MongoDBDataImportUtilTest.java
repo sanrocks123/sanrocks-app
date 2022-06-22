@@ -1,19 +1,19 @@
 package bux.tradingbot.service;
 
-import bux.tradingbot.main.BuxTradingBotServiceSelfHostApp;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoWriteException;
 import com.mongodb.bulk.BulkWriteResult;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.BulkWriteOptions;
 import com.mongodb.client.model.InsertOneModel;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -24,14 +24,19 @@ import java.util.List;
 
 @Disabled
 @Slf4j
-@SpringBootTest(classes = BuxTradingBotServiceSelfHostApp.class)
-@ActiveProfiles("localhost")
 public class MongoDBDataImportUtilTest {
 
-    @Autowired
     private MongoTemplate mongoTemplate;
 
-    @Disabled
+    @BeforeEach
+    public void setup() {
+        ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017");
+        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .build();
+        mongoTemplate = new MongoTemplate(MongoClients.create(mongoClientSettings), "tradedb");
+    }
+
     @Test
     public void mongoDataImport() {
         String[] collections = {"companies", "restaurant"};

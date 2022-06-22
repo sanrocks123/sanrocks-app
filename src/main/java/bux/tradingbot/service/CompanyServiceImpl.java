@@ -17,8 +17,12 @@ public class CompanyServiceImpl implements GraphQLQueryResolver, CompanyService 
 
     public Company getCompanyById(final String id) {
         Optional<Company> result = companyRepository.findById(id);
+        if (result.isEmpty()) {
+            throw new RuntimeException("company not found");
+        }
         log.info("getCompanyById, result: [{}]", result.get());
 
-        return companyRepository.findById(id).get();
+        return result.get();
     }
+
 }

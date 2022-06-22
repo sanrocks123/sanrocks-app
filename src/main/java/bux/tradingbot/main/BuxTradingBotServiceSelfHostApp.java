@@ -41,6 +41,7 @@ public class BuxTradingBotServiceSelfHostApp {
         final SpringApplication app = new SpringApplication(BuxTradingBotServiceSelfHostApp.class);
         app.run(args);
 
+        log.info("system: {}", System.getProperties().get("java.runtime.version"));
         log.info("Swagger API Docs - http://localhost:1000/swagger-ui/");
     }
 

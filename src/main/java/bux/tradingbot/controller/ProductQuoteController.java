@@ -32,7 +32,7 @@ public class ProductQuoteController {
      */
     @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<ProductQuoteEvent> streamProducts() {
-        return productQuoteEventReactiveRepository.findAll().delayElements(Duration.ofSeconds(0));
+        return productQuoteEventReactiveRepository.findAll().delayElements(Duration.ofSeconds(1));
     }
 
     /**
