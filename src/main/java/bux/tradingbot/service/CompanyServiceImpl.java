@@ -21,6 +21,7 @@ public class CompanyServiceImpl implements GraphQLQueryResolver, CompanyService 
             throw new RuntimeException("company not found");
         }
         log.info("getCompanyById, result: [{}]", result.get());
+        log.info("getCompanyById, result: [{}]", result.get());
 
         return result.get();
     }

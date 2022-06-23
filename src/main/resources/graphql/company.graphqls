@@ -4,6 +4,7 @@ type Company {
     emailAddress: String
     phoneNumber: String
     description: String
+    url: String
     tweet: Tweet
 }
 

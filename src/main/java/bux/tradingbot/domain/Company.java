@@ -21,6 +21,7 @@ public class Company {
     @Field("phone_number")
     private String phoneNumber;
     private String description;
+    private String url;
 
     private Tweet tweet;
 

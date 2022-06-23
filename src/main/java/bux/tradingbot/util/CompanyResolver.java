@@ -12,12 +12,17 @@ public class CompanyResolver implements GraphQLResolver<Company> {
 
     // auto wire to tweet datasource
 
+    public String getUrl(Company company) {
+        log.info("getUrl, companyId : [{}]", company.getId());
+        return "http://base:port/v1/companies";
+    }
+
     public Tweet getTweet(Company company) {
         Tweet tweet = new Tweet();
         tweet.setId("123");
         tweet.setText("Hello Twitter");
 
-        log.info("getTweet, tweet: {}", tweet);
+        log.info("getTweet, companyId: [{}], tweet: {}", company.getId(), tweet);
         return tweet;
     }
 }
