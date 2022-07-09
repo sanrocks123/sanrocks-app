@@ -17,10 +17,10 @@ import java.util.Objects;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @Slf4j
 @EnableMongoRepositories(basePackages = "bux")
 @EnableReactiveMongoRepositories(basePackages = "bux")
+// @EnableElasticsearchRepositories(basePackages = "bux")
 @SpringBootApplication(scanBasePackages = "bux")
 public class BuxTradingBotServiceSelfHostApp {
 
@@ -34,9 +34,11 @@ public class BuxTradingBotServiceSelfHostApp {
         Object profile = System.getenv().get("PROFILE");
 
         if (!Objects.isNull(profile) && !SUPPORTED_PROFILES.contains(profile.toString().toLowerCase())) {
-            throw new IllegalArgumentException(String.format("Unsupported spring profile. Supported profile are [profile=%s]", SUPPORTED_PROFILES));
+            throw new IllegalArgumentException(String
+                    .format("Unsupported spring profile. Supported profile are [profile=%s]", SUPPORTED_PROFILES));
         }
-        System.setProperty("spring.profiles.active", Objects.isNull(profile) ? "localhost" : profile.toString().toLowerCase());
+        System.setProperty("spring.profiles.active",
+                Objects.isNull(profile) ? "localhost" : profile.toString().toLowerCase());
 
         final SpringApplication app = new SpringApplication(BuxTradingBotServiceSelfHostApp.class);
         app.run(args);

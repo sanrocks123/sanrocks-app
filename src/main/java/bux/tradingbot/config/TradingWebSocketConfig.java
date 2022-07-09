@@ -55,7 +55,7 @@ public class TradingWebSocketConfig {
         this.url = String.format("%s%s", this.url.trim(), TradeBotUtils.SUBSCRIPTION);
         this.token = String.format("Bearer %s", this.token);
 
-        new Thread(() -> connect(eventHandler), "connectSocket").start();
+        // new Thread(() -> connect(eventHandler), "connectSocket").start();
     }
 
     /**

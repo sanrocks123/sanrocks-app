@@ -16,7 +16,6 @@ import java.time.Duration;
 @SpringBootTest(classes = BuxTradingBotServiceSelfHostApp.class)
 public class ProductQuoteIntegrationTest {
 
-
     @Disabled
     @Test
     public void givenStreamAPI_whenItsCalled_thenConsumeDataInStream() throws InterruptedException {

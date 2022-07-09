@@ -19,8 +19,8 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.11
-targetCompatibility = 1.11
+sourceCompatibility = 11
+targetCompatibility = 11
 
 configurations {
     testCompile
@@ -50,6 +50,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.7.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.7.0'
     implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
+    //implementation 'org.springframework.data:spring-data-elasticsearch:4.0.0.RELEASE'
 
     implementation 'com.graphql-java:graphql-java-tools:5.2.4'
     implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'

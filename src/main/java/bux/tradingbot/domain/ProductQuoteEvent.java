@@ -5,8 +5,6 @@ import lombok.Data;
 import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;

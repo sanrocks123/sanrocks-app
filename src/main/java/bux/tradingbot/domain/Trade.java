@@ -20,7 +20,7 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Trade implements Serializable {
 
-    private static final long SerialVersionUID = 10l;
+    private static final long serialVersionUID = 10l;
 
     private String id;
     private String positionId;

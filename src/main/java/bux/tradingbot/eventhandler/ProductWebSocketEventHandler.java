@@ -29,13 +29,13 @@ public class ProductWebSocketEventHandler extends Endpoint {
     private final ProductEventService eventService;
     private Session session;
 
-
     /**
      * @param tradingWebSocketConfig
      * @param eventService
      * @param productTrades
      */
-    public ProductWebSocketEventHandler(final TradingWebSocketConfig tradingWebSocketConfig, final ProductEventService eventService, final DefaultProductLoader productTrades) {
+    public ProductWebSocketEventHandler(final TradingWebSocketConfig tradingWebSocketConfig,
+            final ProductEventService eventService, final DefaultProductLoader productTrades) {
         this.tradingWebSocketConfig = tradingWebSocketConfig;
         this.eventService = eventService;
         this.productTrades = productTrades;
@@ -84,14 +84,14 @@ public class ProductWebSocketEventHandler extends Endpoint {
         });
     }
 
-
     /**
      * @param userSession
      * @param reason
      */
     @Override
     public void onClose(Session userSession, CloseReason reason) {
-        log.info("onClose socket event[{}] - reason [{}] [{}]", userSession.getId(), reason.getCloseCode(), reason.getReasonPhrase());
+        log.info("onClose socket event[{}] - reason [{}] [{}]", userSession.getId(), reason.getCloseCode(),
+                reason.getReasonPhrase());
         this.session = null;
 
         // retry connection on closure
@@ -135,5 +135,3 @@ public class ProductWebSocketEventHandler extends Endpoint {
         }
     }
 }
-
-
