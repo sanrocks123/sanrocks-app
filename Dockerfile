@@ -1,4 +1,4 @@
-# @Description  : Dockerfile for bux trading bot
+# @Description  : Dockerfile for sanrocks trading bot
 # @Author       : Sanjeev Saxena
 # @version      : v1.0
 
@@ -6,8 +6,8 @@ FROM openjdk
 
 LABEL author Sanjeev
 
-ENV SERVICE_NAME=bux-trading-bot
-ENV SERVICE_HOME=/usr/local/bux-trading-bot
+ENV SERVICE_NAME=trading-bot
+ENV SERVICE_HOME=/usr/local/trading-bot
 ENV SERVICE_SCRIPTS=${SERVICE_HOME}/scripts
 ENV CONFIG=config
 ENV LIB=lib
