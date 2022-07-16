@@ -1,4 +1,4 @@
-package programming.dto;
+package programming.domain;
 
 import org.json.JSONObject;
 

@@ -4,9 +4,9 @@
 
 package programming.general;
 
-import programming.dto.Counter;
-import programming.dto.Employee;
-import programming.dto.OddEvenCounter;
+import programming.domain.Counter;
+import programming.domain.Employee;
+import programming.domain.OddEvenCounter;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;

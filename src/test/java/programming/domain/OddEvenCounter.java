@@ -2,7 +2,7 @@
  * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
  */
 
-package programming.dto;
+package programming.domain;
 
 import java.util.concurrent.TimeUnit;
 

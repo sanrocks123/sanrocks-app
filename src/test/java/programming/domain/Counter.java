@@ -1,4 +1,4 @@
-package programming.dto;
+package programming.domain;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
