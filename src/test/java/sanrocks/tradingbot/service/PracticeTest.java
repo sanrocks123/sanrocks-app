@@ -5,9 +5,11 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClients;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+@Disabled
 @Slf4j
 //@SpringBootTest(classes = BuxTradingBotServiceSelfHostApp.class)
 public class PracticeTest {
@@ -24,21 +26,21 @@ public class PracticeTest {
         restaurantDbTemplate = new MongoTemplate(MongoClients.create(mongoClientSettings), "restaurantdb");
 
         /**
-        ClientConfiguration clientConfiguration
-                = ClientConfiguration.builder()
-                .connectedTo("localhost:9200")
-                .build();
+         ClientConfiguration clientConfiguration
+         = ClientConfiguration.builder()
+         .connectedTo("localhost:9200")
+         .build();
 
-        esTemplate = new ElasticsearchRestTemplate(RestClients.create(clientConfiguration).rest());
-    */
-         }
+         esTemplate = new ElasticsearchRestTemplate(RestClients.create(clientConfiguration).rest());
+         */
+    }
 
-    //@Disabled
+    @Disabled
     @Test
     public void testElasticSearchImport() {
         restaurantDbTemplate.getCollection("restaurant").find().forEach(r -> {
             log.info("document : {}", r.toJson());
-           // esTemplate.
+            // esTemplate.
 
         });
     }
