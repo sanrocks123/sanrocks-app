@@ -1,17 +1,20 @@
 package bux.tradingbot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Builder;
 import lombok.Data;
 import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Java Source Product created on 12/23/2021
@@ -31,6 +34,9 @@ public class Product implements Serializable {
 
     @Id
     private String productId;
+
+    @NotBlank
+    @Size(min = 0, max = 20)
     private String productName;
     private BigDecimal currentPrice;
     private BigDecimal buyPrice;

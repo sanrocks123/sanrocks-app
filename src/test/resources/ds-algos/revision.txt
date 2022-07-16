@@ -1,0 +1,51 @@
+#Arrays
+
+
+
+#LinkedList
+
+
+
+#StacksQueues
+
+
+
+
+#Tree
+
+
+
+
+#Heap
+
+
+
+
+
+#Hashing
+  largest subarray with 0 sum
+  count distinct elements in every window
+  array pair sum divisibility
+  longest consecutive subsequence  a[] = {2,6,1,9,4,5,3} o/p 123456
+  zero sum subarrays
+
+
+#Graph
+
+
+
+#Greedy
+  activity selection - sort the pair by finish time and loop over to find finish < start
+  Page Faults in LRU - hashmap pageNo, Index
+  largest number possible N = 2, S = 9, O = 90
+
+
+
+#DynamicProgramming
+  max length chain  -- similar to activity selection
+
+
+
+#Backtracking
+
+

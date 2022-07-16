@@ -3,6 +3,11 @@ package bux.tradingbot.controller;
 import bux.tradingbot.domain.Product;
 import bux.tradingbot.repository.ProductRepository;
 import bux.tradingbot.util.DefaultProductLoader;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +20,6 @@ import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -37,6 +41,11 @@ public class ProductController {
     private ProductRepository productRepository;
 
     @PostMapping
+    @Operation(summary = "Create new product resource")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "New product resource created", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))}),
+            @ApiResponse(responseCode = "400", description = "something is wrong product request payload", content = @Content)})
     public Mono<List<Product>> save(@RequestBody Product product) throws ExecutionException, InterruptedException {
 
         Callable<Mono<Product>> callable = () -> {
@@ -56,6 +65,7 @@ public class ProductController {
      * @return
      */
     @GetMapping("/all")
+    @Operation(summary = "API to list products")
     public ResponseEntity<List<Product>> getAllProducts() {
         return new ResponseEntity<>(productTrades.getProducts().entrySet().stream().map(e -> e.getValue()).collect(Collectors.toList()), HttpStatus.OK);
     }
@@ -64,6 +74,11 @@ public class ProductController {
      * @return
      */
     @GetMapping("/{productId}")
+    @Operation(summary = "API to find product by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "product found", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))}),
+            @ApiResponse(responseCode = "404", description = "Product Not Found", content = @Content)})
     public ResponseEntity<Product> getProductById(@PathVariable("productId") String productId) {
 
         Product product = productTrades.getProducts().get(productId);

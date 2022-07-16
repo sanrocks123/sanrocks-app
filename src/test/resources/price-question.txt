@@ -1,0 +1,75 @@
+    
+    Q1
+    
+    b a na na n o b a n o  n  o
+    1 2 3  4  5 6 7 8 9 10 11 12
+
+    /**
+     *
+     *  
+     *
+     * Input na, banananobanono
+     *
+     * Output 3,4
+     *
+     */
+    @Test
+    public void testCase1() {
+        final String result = findPosition("na", "banananobanono");
+        Assert.assertEquals("3,4", result);
+    }
+
+    // TODO Solution
+    publis static String findPosition(String privateKey, String publicKey){
+
+
+        return "";
+    }
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Q2
+
+	ItemCode	ItemName	Price	  Qty	  Total
+-----------------------------------------------------------
+				
+	1001		  Apple		  1.2		  4	    4.8
+	1002		  Orange		1.4		  3	    4.2
+	1003		  Banana		1.7		  2	    3.4
+
+-----------------------------------------------------------				
+										                12.4
+				Tax @12 %				            1.48
+
+-----------------------------------------------------------				
+				Total Payable			          13.88
+
+						
+Todo
+    - Represent above data
+
+Cart Functions-
+- addItemToCart
+- removeItemFromCart
+- generateInvoice
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Q3
+
+Print number from 1..10 with 3 threads
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Q4
+
+Micro service 
+- Security, RBAC, Token
+- data consistency patterns
+- Deployment Model
+
+design
+service to accept data from multiple sources and unify results
+
+
