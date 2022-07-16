@@ -1,4 +1,4 @@
-package programming.designpatterns;
+package programming.problemsolving;
 
 import org.junit.Test;
 

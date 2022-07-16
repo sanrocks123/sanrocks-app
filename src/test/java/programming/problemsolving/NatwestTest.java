@@ -1,4 +1,4 @@
-package programming.general;
+package programming.problemsolving;
 
 import java.util.concurrent.*;
 

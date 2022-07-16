@@ -1,4 +1,4 @@
-package programming.algos;
+package programming.problemsolving;
 
 import org.junit.Assert;
 import org.junit.Test;
