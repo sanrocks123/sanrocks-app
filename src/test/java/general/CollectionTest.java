@@ -2,7 +2,7 @@
  * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
  */
 
-package java;
+package general;
 
 import org.junit.Assert;
 import org.junit.Test;

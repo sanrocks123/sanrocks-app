@@ -2,7 +2,7 @@
  * Copyright (c) @Sanjeev Saxena 2017. All Rights Reserved.
  */
 
-package java;
+package general;
 
 import dto.*;
 import org.junit.Assert;

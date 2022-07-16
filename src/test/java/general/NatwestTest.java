@@ -1,4 +1,4 @@
-package java;
+package general;
 
 import java.util.concurrent.*;
 

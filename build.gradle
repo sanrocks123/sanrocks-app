@@ -56,7 +56,6 @@ dependencies {
 
     implementation 'com.graphql-java:graphql-java-tools:5.2.4'
     implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
-    implementation "com.graphql-java:graphiql-spring-boot-starter:5.0.2"
 
     compileOnly "org.projectlombok:lombok:$lombok"
     annotationProcessor "org.projectlombok:lombok:$lombok"
@@ -102,6 +101,7 @@ tasks.named('build') {
 
 test {
     //useJUnitPlatform()
+    maxParallelForks = Runtime.runtime.availableProcessors()
     testLogging {
         events "passed", "skipped", "failed"
     }

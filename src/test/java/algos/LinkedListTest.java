@@ -47,11 +47,11 @@ public class LinkedListTest {
     }
 
     @Test
-    public void testListOperations(){
-        List<String> names = Arrays.asList("a","b","c");
+    public void testListOperations() {
+        List<String> names = Arrays.asList("a", "b", "c");
         System.out.println(names);
 
-        names.add(0,"d");
+        //names.add(0, "d");
 
         System.out.print(names);
 
