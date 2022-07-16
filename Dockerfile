@@ -20,7 +20,7 @@ WORKDIR $SERVICE_HOME
 RUN mkdir -p $LIB
 RUN mkdir -p $CONFIG
 
-COPY ./build/lib $SERVICE_HOME/$LIB
+ADD ./build/distributions/$SERVICE_NAME-1.0.tar $SERVICE_HOME
 COPY ./build/scripts $SERVICE_SCRIPTS
 
 RUN pwd

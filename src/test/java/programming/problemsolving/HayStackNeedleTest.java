@@ -33,7 +33,7 @@ public class HayStackNeedleTest {
     /**
      * @param keyLength
      * @param key
-     * @param stack
+     * @param messageHash
      * @return
      */
     private String findPosition(int keyLength, String key, String messageHash) {
