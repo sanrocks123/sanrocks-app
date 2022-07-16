@@ -7,16 +7,16 @@ buildscript {
     repositories {
         mavenCentral()
     }
-
 }
 
 plugins {
     id("org.springframework.boot") version "2.6.6"
     id("org.springdoc.openapi-gradle-plugin") version "1.3.4"
 }
+
 apply plugin: 'application'
 
-mainClassName = 'bux.tradingbot.main.BuxTradingBotServiceSelfHostApp'
+mainClassName = 'sanrocks.tradingbot.main.TradingBotServiceSelfHostApp'
 version = '1.0'
 
 repositories {
@@ -68,39 +68,8 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test:$springboot"
 }
 
-jar {
-    manifest {
-        attributes(
-                'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),
-                'Main-Class': 'bux.tradingbot.main.BuxTradingBotServiceSelfHostApp'
-        )
-    }
-}
-
-tasks.named('build') {
-    doLast {
-        println "Copying deps -> lib..."
-        copy {
-            from configurations.compileClasspath
-            into "$buildDir/lib"
-        }
-
-        println "Copying Dockerfile to build"
-        copy {
-            from "./Dockerfile"
-            into "$buildDir"
-        }
-
-        println "Copying libs -> lib..."
-        copy {
-            from "$buildDir/libs"
-            into "$buildDir/lib"
-        }
-    }
-}
-
 test {
-    //useJUnitPlatform()
+    useJUnitPlatform()
     maxParallelForks = Runtime.runtime.availableProcessors()
     testLogging {
         events "passed", "skipped", "failed"
@@ -108,5 +77,5 @@ test {
 }
 
 openApi {
-    apiDocsUrl.set("http://localhost:1000/v3/api-docs")
+    apiDocsUrl.set("http://localhost:1000/trading-bot/v3/api-docs")
 }

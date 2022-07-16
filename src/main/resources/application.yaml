@@ -3,8 +3,16 @@
 
 server:
   port: 1000
+  servlet:
+    context-path: /trading-bot
 
 spring:
+  application:
+    name: trading-bot-service
+    title: Trading Bot Service
+    version: 1.0
+  banner:
+    location: classpath:banner.txt
   data:
     mongodb:
       database: tradedb

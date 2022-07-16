@@ -1,0 +1,15 @@
+
+,--------.                     ,--. ,--.                    ,-----.             ,--.
+'--.  .--' ,--.--.  ,--,--.  ,-|  | `--' ,--,--,   ,---.    |  |) /_   ,---.  ,-'  '-.
+   |  |    |  .--' ' ,-.  | ' .-. | ,--. |      \ | .-. |   |  .-.  \ | .-. | '-.  .-'
+   |  |    |  |    \ '-'  | \ `-' | |  | |  ||  | ' '-' '   |  '--' / ' '-' '   |  |
+   `--'    `--'     `--`--'  `---'  `--' `--''--' .`-  /    `------'   `---'    `--'
+                                                  `---'
+app-name            : ${spring.application.name}
+version             : v${spring.application.version}
+port                : ${server.port}
+context-path        : ${server.servlet.context-path}
+api-docs            : http://localhost:1000/trading-bot/swagger-ui.html
+
+Developer
+sanrocks123@gmail.com

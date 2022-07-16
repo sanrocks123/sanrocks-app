@@ -6,7 +6,7 @@
     <li>set console system environment property <code>[export PROFILE= localhost|dev]</code>. Default profile is set to <code>"dev"</code></li>
     <li>for localhost profile - ensure localhost bux server is up & running (<code>java -jar docs/bux-server.jar</code>)</li>
     <li>default logging level is set to INFO. To change app logging level <code>export LOG_LEVEL=[INFO|DEBUG|TRACE]</code></li>
-    <li>app entry point class <code>bux.tradingbot.main.BuxTradingBotServiceSelfHostApp</code></li>
+    <li>app entry point class <code>BuxTradingBotServiceSelfHostApp</code></li>
     <li>it takes a while before position open/close conditions are satisfied, so trade logs may take a while to appear on console</li>
 </ol>
 
