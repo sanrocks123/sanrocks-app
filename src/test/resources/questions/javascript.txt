@@ -19,3 +19,8 @@ code
      return x+y;
    }
   f1(2)
+
+create component with fetch API calls
+
+(advanced) create timer component with start, stop , pause buttons
+

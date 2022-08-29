@@ -1,8 +1,5 @@
 package sanrocks.tradingbot.controller;
 
-import sanrocks.tradingbot.domain.ProductQuoteEvent;
-import sanrocks.tradingbot.repository.ProductQuoteEventReactiveRepository;
-import sanrocks.tradingbot.repository.ProductQuoteEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import sanrocks.tradingbot.domain.ProductQuoteEvent;
+import sanrocks.tradingbot.repository.ProductQuoteEventReactiveRepository;
+import sanrocks.tradingbot.repository.ProductQuoteEventRepository;
 
 import java.time.Duration;
 import java.util.List;
@@ -32,7 +32,7 @@ public class ProductQuoteController {
      */
     @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<ProductQuoteEvent> streamProducts() {
-        return productQuoteEventReactiveRepository.findAll().delayElements(Duration.ofSeconds(1));
+        return productQuoteEventReactiveRepository.findAll().delayElements(Duration.ofSeconds(0));
     }
 
     /**

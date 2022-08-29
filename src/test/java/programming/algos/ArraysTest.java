@@ -1,9 +1,9 @@
 package programming.algos;
 
+
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,22 +14,20 @@ import java.util.stream.Collectors;
  * Java Source ArraysTest.java created on Jun 5, 2021
  *
  * @author : Sanjeev Saxena
- * @email : sanrocks123@gmail.com
  * @version : 1.0
+ * @email : sanrocks123@gmail.com
  */
 
+@Slf4j
 public class ArraysTest {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Test
     public void testArrayAlternateSorting() {
-        final int[] arr = { 1, 2, 3, -4, -1, 4 };
+        final Integer[] arr = {1, 2, 3, -4, -1, 4};
 
         Arrays.sort(arr);
-        for (final int a : arr) {
-            System.out.print(a);
-        }
+        log.info("sorted array: {}", (Object) arr);
 
         int posStartIdx = -1;
         for (int i = 0; i < arr.length; i++) {
@@ -48,8 +46,7 @@ public class ArraysTest {
                     arr[j] = temp;
                     j++;
                 }
-            }
-            else {
+            } else {
                 if (arr[i] < 0) {
                     final int temp = arr[i];
                     arr[i] = arr[j];
@@ -69,8 +66,8 @@ public class ArraysTest {
     @Test
     public void testCountSubArray() {
 
-        final int[] arr = { 3, 4, 1, 6, 2 };
-        final int[] output = { 1, 3, 1, 5, 1 };
+        final int[] arr = {3, 4, 1, 6, 2};
+        final int[] output = {1, 3, 1, 5, 1};
 
         final int[] result = new int[arr.length];
         int count = 0;
@@ -98,14 +95,13 @@ public class ArraysTest {
     @Test
     public void testDuplicateNumbers() {
 
-        final int arr[] = { 1, 2, 3, 1, 3, 6, 6 };
+        final int arr[] = {1, 2, 3, 1, 3, 6, 6};
 
         for (int i = 0; i < arr.length; i++) {
             final int j = Math.abs(arr[i]);
             if (arr[j] >= 0) {
                 arr[j] = -arr[j];
-            }
-            else {
+            } else {
                 System.out.println(j + " ");
             }
         }
@@ -113,7 +109,7 @@ public class ArraysTest {
 
     @Test
     public void testLargestNumberFormed() {
-        final int arr[] = { 1, 34, 3, 98, 9, 76, 45, 4 };
+        final int arr[] = {1, 34, 3, 98, 9, 76, 45, 4};
 
         final List<String> arrList = Arrays.stream(arr).mapToObj(a -> String.valueOf(a)).collect(Collectors.toList());
 
@@ -132,7 +128,7 @@ public class ArraysTest {
     @Test
     public void testLargestSumContigousSubarray() {
 
-        final int a[] = new int[] { -2, -3, 4, -1, -2, 1, 5, -3 };
+        final int a[] = new int[]{-2, -3, 4, -1, -2, 1, 5, -3};
 
         int sum = 0;
         int currentSum = 0;
@@ -153,7 +149,7 @@ public class ArraysTest {
     @Test
     public void testProductArrayPuzzleTest() {
 
-        final int a[] = new int[] { 10, 3, 5, 6, 2 };
+        final int a[] = new int[]{10, 3, 5, 6, 2};
         final int r[] = new int[a.length];
         for (int i = 0; i <= a.length - 1; i++) {
 
@@ -169,7 +165,7 @@ public class ArraysTest {
     @Test
     public void testReverse() {
 
-        final int a[] = new int[] { 1, 2, 3, 4, 5 };
+        final int a[] = new int[]{1, 2, 3, 4, 5};
 
         for (final Integer i : a) {
             log.info("before reversal : {}", i);
@@ -189,7 +185,7 @@ public class ArraysTest {
     @Test
     public void testSeggregateEvenOdd() {
 
-        final int[] arr = { 1, 2, 3, 4, 5, 6 };
+        final int[] arr = {1, 2, 3, 4, 5, 6};
 
         int prevOdd = -1;
         for (int i = 0; i < arr.length; i++) {

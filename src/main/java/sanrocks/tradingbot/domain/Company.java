@@ -25,6 +25,8 @@ public class Company {
 
     private Tweet tweet;
 
+    private String time;
+
     public String toString() {
         return new Gson().toJson(this);
     }
