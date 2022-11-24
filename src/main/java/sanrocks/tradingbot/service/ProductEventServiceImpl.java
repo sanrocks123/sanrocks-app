@@ -51,12 +51,16 @@ public class ProductEventServiceImpl implements ProductEventService {
             ProductQuoteEvent pqe = null;
             try {
                 pqe = tradingEventQueue.take();
-                log.debug(String.format("consumer[%s] picked event, securityId:[%7s], price:[%-8s], event: %s", Thread.currentThread().getName(), pqe.getSecurityId(), pqe.getCurrentPrice(), pqe));
+                log.debug(String.format(
+                    "consumer[%s] picked event, securityId:[%7s], price:[%-8s], event: %s",
+                    Thread.currentThread().getName(), pqe.getSecurityId(), pqe.getCurrentPrice(),
+                    pqe));
 
                 eventHandler.handleMessageEvent(pqe);
 
             } catch (Exception ex) {
-                log.error("[{} {}] event processing error - {}", pqe.getSecurityId(), getProductName(pqe), ex.getMessage());
+                log.error("[{} {}] event processing error - {}", pqe.getSecurityId(),
+                    getProductName(pqe), ex.getMessage());
                 pushError(pqe, ex.getMessage());
             }
         }
@@ -83,22 +87,31 @@ public class ProductEventServiceImpl implements ProductEventService {
     @Override
     public boolean pushTradeQuoteEvent(final ProductQuoteEvent pqe) {
 
-        if (!pqe.isTradingQuoteEvent())
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "", new ErrorResponse("only trading quote events are accepted", "invalid_trade_quote").toByteArray(), Charset.defaultCharset());
+        if (!pqe.isTradingQuoteEvent()) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "",
+                new ErrorResponse("only trading quote events are accepted",
+                    "invalid_trade_quote").toByteArray(), Charset.defaultCharset());
+        }
 
-        if (!productLoader.getProducts().containsKey(pqe.getSecurityId()))
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "", new ErrorResponse(String.format("securityId [%s] not subscribed", pqe.getSecurityId()), "invalid_product_id").toByteArray(), Charset.defaultCharset());
+        if (!productLoader.getProducts().containsKey(pqe.getSecurityId())) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "", new ErrorResponse(
+                String.format("securityId [%s] not subscribed", pqe.getSecurityId()),
+                "invalid_product_id").toByteArray(), Charset.defaultCharset());
+        }
 
-        if (tradingEventQueue.offer(pqe))
+        if (tradingEventQueue.offer(pqe)) {
             return true;
+        }
 
         pushError(pqe, "trading event queue is full");
-        throw new HttpClientErrorException(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED, "", new ErrorResponse("trading event queue is full, please retry again after sometime", "queue_full").toByteArray(), Charset.defaultCharset());
+        throw new HttpClientErrorException(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED, "",
+            new ErrorResponse("trading event queue is full, please retry again after sometime",
+                "queue_full").toByteArray(), Charset.defaultCharset());
     }
 
     /**
-     * Push event failures to error queue
-     * for quick temporary access - store product specific error events in product object.
+     * Push event failures to error queue for quick temporary access - store product specific error
+     * events in product object.
      *
      * @param pqe
      * @param errorMessage
@@ -129,7 +142,8 @@ public class ProductEventServiceImpl implements ProductEventService {
      * @return
      */
     private String getProductName(final ProductQuoteEvent pqe) {
-        return productLoader.getProducts().getOrDefault(pqe.getSecurityId(), new Product()).getProductName();
+        return productLoader.getProducts().getOrDefault(pqe.getSecurityId(), new Product())
+            .getProductName();
     }
 
 }

@@ -8,6 +8,7 @@ import sanrocks.tradingbot.domain.Company;
 import sanrocks.tradingbot.exception.CompanyNotFoundException;
 import sanrocks.tradingbot.repository.CompanyRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -17,14 +18,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements GraphQLQueryResolver, CompanyService {
     private final CompanyRepository companyRepository;
+    private final HttpServletRequest httpServletRequest;
 
     public Company getCompanyById(final String id) {
+        log.info("http request: {}", httpServletRequest.getRequestURI());
         Optional<Company> result = companyRepository.findById(id);
+
         if (result.isEmpty()) {
             Map<String, Object> map = new HashMap<>();
             map.put("hint", "you may want to try out with some other valid companyIds");
             throw new CompanyNotFoundException(String.format("Company Id '%s' Not Found", id), map);
         }
+
         log.info("getCompanyById, result: [{}]", result.get());
         log.info("getCompanyById, result: [{}]", result.get());
 

@@ -1,7 +1,5 @@
 package sanrocks.tradingbot.service;
 
-import sanrocks.tradingbot.domain.Trade;
-import sanrocks.tradingbot.util.TradeBotUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import sanrocks.tradingbot.domain.Trade;
+import sanrocks.tradingbot.util.TradeBotUtils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Java Source TradeServiceImpl created on 12/23/2021
@@ -85,6 +86,7 @@ public class TradeServiceImpl implements TradeService {
         headers.setAcceptLanguage(Locale.LanguageRange.parse("nl-NL,en;q=0.8"));
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
         return headers;
     }
 

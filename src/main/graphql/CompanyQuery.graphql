@@ -1,0 +1,10 @@
+query CompanyQuery($id: ID) {
+    companyById(id: $id) {
+        emailAddress
+        id
+        name
+        tweet {
+            text
+        }
+    }
+}

@@ -10,6 +10,7 @@ type Company {
     description: String
     url: String
     tweet: Tweet
+
 }
 
 #tweet composition

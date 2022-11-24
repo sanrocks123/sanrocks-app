@@ -51,6 +51,10 @@ public class Product implements Serializable {
     public Product() {
     }
 
+    public Product(String productName) {
+        this.productName = productName;
+    }
+
     /**
      * @param productId
      * @param productName
@@ -58,7 +62,8 @@ public class Product implements Serializable {
      * @param lowerLimitSellPrice
      * @param upperLimitSellPrice
      */
-    public Product(String productId, String productName, BigDecimal buyPrice, BigDecimal lowerLimitSellPrice, BigDecimal upperLimitSellPrice) {
+    public Product(String productId, String productName, BigDecimal buyPrice,
+        BigDecimal lowerLimitSellPrice, BigDecimal upperLimitSellPrice) {
         this.productId = productId;
         this.productName = productName;
         this.buyPrice = buyPrice.setScale(2, RoundingMode.HALF_DOWN);
@@ -71,8 +76,9 @@ public class Product implements Serializable {
      * @return
      */
     public boolean isTargetBuyPrice() {
-        if (null == getCurrentPrice())
+        if (null == getCurrentPrice()) {
             return false;
+        }
         return getCurrentPrice().equals(getBuyPrice());
     }
 
@@ -80,9 +86,11 @@ public class Product implements Serializable {
      * @return
      */
     public boolean isTargetSellPrice() {
-        if (null == getCurrentPrice())
+        if (null == getCurrentPrice()) {
             return false;
-        return getCurrentPrice().equals(getLowerLimitSellPrice()) || getCurrentPrice().equals(getUpperLimitSellPrice());
+        }
+        return getCurrentPrice().equals(getLowerLimitSellPrice()) || getCurrentPrice().equals(
+            getUpperLimitSellPrice());
     }
 
 
@@ -154,14 +162,19 @@ public class Product implements Serializable {
         return new JSONObject(this).toString();
     }
 
+    public String toString(int indent) {
+        return new JSONObject(this).toString(indent);
+    }
+
     public BigDecimal getCurrentPrice() {
         return currentPrice;
     }
 
     public void setCurrentPrice(BigDecimal currentPrice) {
         this.currentPrice = currentPrice;
-        if (!Objects.isNull(currentPrice))
+        if (!Objects.isNull(currentPrice)) {
             this.getPriceChangeList().add(currentPrice);
+        }
     }
 
     public List<String> getOpenPositionIds() {

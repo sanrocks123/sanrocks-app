@@ -1,0 +1,71 @@
+DELETE /charges
+
+PUT /charges
+{
+  "settings": {
+    "number_of_shards": 1
+  },
+  "mappings": {
+    "properties": {
+      "charge_code": { "type": "keyword" }
+
+    }
+  }
+}
+
+
+PUT /charges/_bulk?refresh
+{"index":{"_id":"courier_fees_ins"}}
+{"charge_code":"courier_fees", "charge_level":3, "charge_amount":10}
+{"index":{"_id":"courier_fees_cif"}}
+{"charge_code":"courier_fees", "charge_level":2, "charge_amount":20}
+{"index":{"_id":"courier_fees_branch"}}
+{"charge_code":"courier_fees", "charge_level":1, "charge_amount":50}
+{"index":{"_id":"adv_comm_branch"}}
+{"charge_code":"adv_comm_fees", "charge_level":1, "charge_amount":80}
+{"index":{"_id":"adv_comm_cif"}}
+{"charge_code":"adv_comm_fees", "charge_level":2, "charge_amount":70}
+{"index":{"_id":"swift_fees_branch"}}
+{"charge_code":"swift_fees", "charge_level":1, "charge_amount":35}
+
+
+GET /charges/_mapping
+
+
+GET charges/_search
+{
+  "query": {
+    "function_score": {
+      "functions": [
+        {
+          "field_value_factor": {
+            "field": "charge_level",
+            "factor": 1.2,
+            "modifier": "none",
+            "missing": 1
+          }
+        }
+      ],
+      "boost_mode": "multiply",
+      "score_mode": "max"
+    }
+  },
+  "aggs": {
+    "by_charge_code": {
+      "terms": {
+        "field": "charge_code",
+        "size": 100,
+        "order": {
+          "_key": "asc"
+        }
+      },
+      "aggs": {
+        "tops": {
+          "top_hits": {
+            "size": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -32,3 +32,5 @@ logging:
   level:
     bux.tradingbot: INFO
     org.springframework: INFO
+    sanrocks.tradingbot: INFO
+    org.jeasy: DEBUG
