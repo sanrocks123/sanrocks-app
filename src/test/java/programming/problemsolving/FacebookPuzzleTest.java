@@ -1,23 +1,22 @@
 package programming.problemsolving;
 
-import org.junit.Assert;
-import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 /**
  * Java Source FacebookTest.java created on Jul 16, 2021
  *
  * @author : Sanjeev Saxena
- * @email : sanrocks123@gmail.com
  * @version : 1.0
+ * @email : sanrocks123@gmail.com
  */
 
 public class FacebookPuzzleTest {
 
     /**
-     *
      * @param N
      * @param K
      * @param M
@@ -63,7 +62,8 @@ public class FacebookPuzzleTest {
             hash.add(Long.valueOf(i));
             seatsAvailable++;
 
-            System.out.printf("current seat found: %d, seatsAvailable: %d, seatsSoFar: %s\n", i, seatsAvailable, hash);
+            System.out.printf("current seat found: %d, seatsAvailable: %d, seatsSoFar: %s\n", i,
+                seatsAvailable, hash);
 
         }
         return seatsAvailable;
@@ -71,10 +71,10 @@ public class FacebookPuzzleTest {
 
     @Test
     public void testDiningTableProblem() {
-        final long[] S = { 2, 6 };
+        final long[] S = {2, 6};
         Assert.assertEquals(3, getMaxAdditionalDinersCount(10, 1, 2, S));
 
-        final long[] S1 = { 11, 6, 14 };
+        final long[] S1 = {11, 6, 14};
         Assert.assertEquals(1, getMaxAdditionalDinersCount(15, 2, 3, S1));
     }
 

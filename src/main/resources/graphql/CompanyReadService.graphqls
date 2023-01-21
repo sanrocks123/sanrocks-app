@@ -1,0 +1,24 @@
+type QueryAPIs {
+    companyById(id: ID): Company
+}
+
+# the company object
+type Company {
+    id: ID
+    # the company name
+    name: String
+    # the email address
+    emailAddress: String
+    # the phone number
+    phoneNumber: String
+    description: String
+    url: String
+    tweet: Tweet
+
+}
+
+#tweet composition
+type Tweet {
+    id: ID,
+    text: String
+}

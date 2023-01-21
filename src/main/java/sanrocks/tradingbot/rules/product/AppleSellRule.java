@@ -13,18 +13,15 @@ import sanrocks.tradingbot.domain.Trade;
 
 @Slf4j
 @Component
-@Rule(name = "when_targetSellPriceMatched_then_applyTrades", description = "apple product sell condition", priority = 1)
+@Rule(name = "when_targetSellPriceMatched_then_applyTrades", description = "apple product sell condition", priority = 0)
 public class AppleSellRule extends ProductBaseRules {
 
     @Condition
     public boolean isTargetSellPriceMatched(@Fact("product") Product product) {
-
         if (null == product.getCurrentPrice()) {
             return false;
         }
-        //return true;
-        return product.getCurrentPrice().compareTo(product.getLowerLimitSellPrice()) == 0
-            || product.getCurrentPrice().compareTo(product.getUpperLimitSellPrice()) == 0;
+        return product.isTargetBuyPrice();
     }
 
     @Action

@@ -1,5 +1,9 @@
+type MutationAPIs {
+    saveCompany(company: CompanyInput): Company
+}
+
 # the company object
-type Company {
+input CompanyInput {
     id: ID
     # the company name
     name: String
@@ -9,12 +13,11 @@ type Company {
     phoneNumber: String
     description: String
     url: String
-    tweet: Tweet
-
+    tweet: TweetInput
 }
 
 #tweet composition
-type Tweet {
+input TweetInput {
     id: ID,
     text: String
 }

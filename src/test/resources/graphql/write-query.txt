@@ -1,0 +1,34 @@
+
+http://localhost:1000/trading-bot/graphql
+
+// query
+mutation saveCompany ($company : CompanyInput){
+    saveCompany(company : $company) {
+        name
+        description
+        emailAddress
+        phoneNumber
+    }
+}
+
+
+// variables
+{
+    "company": {
+        "name":"Sanjeev",
+        "description":"test object creation"
+    }
+}
+
+
+// response
+{
+    "data": {
+        "saveCompany": {
+            "name": "Sanjeev",
+            "description": "test object creation",
+            "emailAddress": null,
+            "phoneNumber": null
+        }
+    }
+}

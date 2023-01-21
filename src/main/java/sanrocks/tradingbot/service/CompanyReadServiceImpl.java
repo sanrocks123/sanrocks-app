@@ -1,6 +1,10 @@
 package sanrocks.tradingbot.service;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -8,15 +12,11 @@ import sanrocks.tradingbot.domain.Company;
 import sanrocks.tradingbot.exception.CompanyNotFoundException;
 import sanrocks.tradingbot.repository.CompanyRepository;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CompanyServiceImpl implements GraphQLQueryResolver, CompanyService {
+public class CompanyReadServiceImpl implements GraphQLQueryResolver, CompanyReadService {
+
     private final CompanyRepository companyRepository;
     private final HttpServletRequest httpServletRequest;
 
@@ -35,4 +35,5 @@ public class CompanyServiceImpl implements GraphQLQueryResolver, CompanyService 
 
         return result.get();
     }
+
 }

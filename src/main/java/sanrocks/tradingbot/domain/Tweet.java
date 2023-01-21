@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 
 @Data
 public class Tweet {
+
     @Id
     private String id;
     private String text;
@@ -13,4 +14,9 @@ public class Tweet {
     public String toString() {
         return new Gson().toJson(this);
     }
+}
+
+@Data
+class TweetInput extends Tweet {
+
 }

@@ -11,7 +11,7 @@ import sanrocks.tradingbot.domain.Product;
 
 @Slf4j
 @Component
-@Rule(name = "when_appleProductMatched_then_applySellPricingLimits", description = "calculate apple pricing", priority = 0)
+@Rule(name = "when_appleProductMatched_then_applySellPricingLimits", description = "calculate apple pricing", priority = 1)
 public class AppleProductRule extends ProductBaseRules {
 
     @Condition
@@ -21,11 +21,12 @@ public class AppleProductRule extends ProductBaseRules {
 
     @Action
     public void applySellPricingLimit(@Fact("product") Product product,
-        @Fact("lowerLimit") BigDecimal lowerLimit, @Fact("upperLimit") BigDecimal upperLimit) {
+        @Fact("buyPrice") BigDecimal buyPrice) {
 
-        product.setLowerLimitSellPrice(lowerLimit);
-        product.setUpperLimitSellPrice(upperLimit);
+        product.setBuyPrice(buyPrice);
 
         log.info("when_applyProductMatched_then_applySellPricingLimits {}", product.toString(4));
+
+        //throw new RuntimeException("Rule apply failure");
     }
 }

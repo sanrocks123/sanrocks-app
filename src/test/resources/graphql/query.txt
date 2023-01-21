@@ -1,0 +1,24 @@
+
+// query
+query hello($companyId: ID)
+{
+    companyById(id: $companyId) {
+        emailAddress
+    }
+}
+
+
+// variables
+{
+    "companyId":"52cdef7c4bab8bd675297d8a"
+}
+
+// response
+
+{
+    "data": {
+        "companyById": {
+            "emailAddress": "info@wetpaint.com"
+        }
+    }
+}

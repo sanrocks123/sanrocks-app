@@ -20,12 +20,11 @@ public class ProductRulesService {
     public void init() {
 
         Product product = new Product("apple");
-        product.setCurrentPrice(new BigDecimal("160.10"));
+        product.setCurrentPrice(new BigDecimal("160.12"));
 
         Facts facts = new Facts();
         facts.put("product", product);
-        facts.put("lowerLimit", new BigDecimal("50.02"));
-        facts.put("upperLimit", new BigDecimal("60.10"));
+        facts.put("buyPrice", new BigDecimal("160.10"));
 
         productRuleEngine.doExecute(facts);
     }
