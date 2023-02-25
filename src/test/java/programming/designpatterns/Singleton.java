@@ -1,14 +1,10 @@
-/**
- * Copyright (c) @Sanjeev Saxena 2017. All Rights Reserved.
- */
-
+/* (C) 2017 */
 package programming.designpatterns;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Java Source Singleton.java created on Nov 27, 2019
@@ -17,15 +13,12 @@ import java.util.concurrent.TimeUnit;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class Singleton implements Cloneable {
 
     private static volatile Singleton singleton = null;
     private static final Logger log = LoggerFactory.getLogger(Singleton.class);
 
-    /**
-     *
-     */
+    /** */
     public static Singleton getInstance() {
 
         log.info("started");
@@ -43,14 +36,11 @@ public class Singleton implements Cloneable {
         return singleton;
     }
 
-    /**
-     *
-     */
+    /** */
     private Singleton() {
         try {
             TimeUnit.SECONDS.sleep(5);
-        }
-        catch (final InterruptedException e) {
+        } catch (final InterruptedException e) {
             e.printStackTrace();
         }
     }

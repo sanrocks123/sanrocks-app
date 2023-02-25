@@ -1,13 +1,7 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import org.json.JSONObject;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import lombok.Data;
+import org.json.JSONObject;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Java Source Product created on 12/23/2021
@@ -23,7 +23,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @Data
 @Document
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -32,12 +31,12 @@ public class Product implements Serializable {
     private static final long SerialVersionUID = 10l;
     private static final int CLOSING_POSITION_MARGIN = 5;
 
-    @Id
-    private String productId;
+    @Id private String productId;
 
     @NotBlank
     @Size(min = 0, max = 20)
     private String productName;
+
     private BigDecimal currentPrice;
     private BigDecimal buyPrice;
     private BigDecimal upperLimitSellPrice;
@@ -48,8 +47,7 @@ public class Product implements Serializable {
     private List<String> openPositionIds = new CopyOnWriteArrayList<>();
     private List<String> errors = new ArrayList<>();
 
-    public Product() {
-    }
+    public Product() {}
 
     public Product(String productName) {
         this.productName = productName;
@@ -62,15 +60,18 @@ public class Product implements Serializable {
      * @param lowerLimitSellPrice
      * @param upperLimitSellPrice
      */
-    public Product(String productId, String productName, BigDecimal buyPrice,
-        BigDecimal lowerLimitSellPrice, BigDecimal upperLimitSellPrice) {
+    public Product(
+            String productId,
+            String productName,
+            BigDecimal buyPrice,
+            BigDecimal lowerLimitSellPrice,
+            BigDecimal upperLimitSellPrice) {
         this.productId = productId;
         this.productName = productName;
         this.buyPrice = buyPrice.setScale(2, RoundingMode.HALF_DOWN);
         this.lowerLimitSellPrice = lowerLimitSellPrice.setScale(2, RoundingMode.HALF_DOWN);
         this.upperLimitSellPrice = upperLimitSellPrice.setScale(2, RoundingMode.HALF_DOWN);
     }
-
 
     /**
      * @return
@@ -89,10 +90,9 @@ public class Product implements Serializable {
         if (null == getCurrentPrice()) {
             return false;
         }
-        return getCurrentPrice().equals(getLowerLimitSellPrice()) || getCurrentPrice().equals(
-            getUpperLimitSellPrice());
+        return getCurrentPrice().equals(getLowerLimitSellPrice())
+                || getCurrentPrice().equals(getUpperLimitSellPrice());
     }
-
 
     /**
      * @param trade

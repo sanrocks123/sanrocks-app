@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.service;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;

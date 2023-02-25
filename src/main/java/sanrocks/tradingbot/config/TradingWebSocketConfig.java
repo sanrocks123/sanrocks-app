@@ -1,24 +1,24 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.config;
 
-import sanrocks.tradingbot.eventhandler.ProductWebSocketEventHandler;
-import sanrocks.tradingbot.service.ProductEventService;
-import sanrocks.tradingbot.util.DefaultProductLoader;
-import sanrocks.tradingbot.util.TradeBotUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.PostConstruct;
-import javax.websocket.ClientEndpointConfig;
-import javax.websocket.ContainerProvider;
-import javax.websocket.WebSocketContainer;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import javax.annotation.PostConstruct;
+import javax.websocket.ClientEndpointConfig;
+import javax.websocket.ContainerProvider;
+import javax.websocket.WebSocketContainer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import sanrocks.tradingbot.eventhandler.ProductWebSocketEventHandler;
+import sanrocks.tradingbot.service.ProductEventService;
+import sanrocks.tradingbot.util.DefaultProductLoader;
+import sanrocks.tradingbot.util.TradeBotUtils;
 
 /**
  * Java Source TradingWebSocketConfig created on 12/25/2021
@@ -27,7 +27,6 @@ import java.util.concurrent.TimeUnit;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @Configuration
 public class TradingWebSocketConfig {
 
@@ -40,18 +39,15 @@ public class TradingWebSocketConfig {
     @Value("${bux.server-api.token}")
     private String token;
 
-    @Autowired
-    private ProductEventService eventService;
+    @Autowired private ProductEventService eventService;
 
-    @Autowired
-    private DefaultProductLoader productTrades;
+    @Autowired private DefaultProductLoader productTrades;
 
-    /**
-     *
-     */
+    /** */
     @PostConstruct
     public void init() {
-        ProductWebSocketEventHandler eventHandler = new ProductWebSocketEventHandler(this, eventService, productTrades);
+        ProductWebSocketEventHandler eventHandler =
+                new ProductWebSocketEventHandler(this, eventService, productTrades);
         this.url = String.format("%s%s", this.url.trim(), TradeBotUtils.SUBSCRIPTION);
         this.token = String.format("Bearer %s", this.token);
 
@@ -64,12 +60,13 @@ public class TradingWebSocketConfig {
     public void connect(final ProductWebSocketEventHandler eventHandler) {
         try {
             ClientEndpointConfig.Builder configBuilder = ClientEndpointConfig.Builder.create();
-            configBuilder.configurator(new ClientEndpointConfig.Configurator() {
-                @Override
-                public void beforeRequest(Map<String, List<String>> headers) {
-                    headers.put("Authorization", Arrays.asList(token));
-                }
-            });
+            configBuilder.configurator(
+                    new ClientEndpointConfig.Configurator() {
+                        @Override
+                        public void beforeRequest(Map<String, List<String>> headers) {
+                            headers.put("Authorization", Arrays.asList(token));
+                        }
+                    });
 
             ClientEndpointConfig clientConfig = configBuilder.build();
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
@@ -86,5 +83,4 @@ public class TradingWebSocketConfig {
             connect(eventHandler);
         }
     }
-
 }

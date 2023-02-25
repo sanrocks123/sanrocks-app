@@ -1,13 +1,14 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Data;
 import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Java Source ProductQuoteEvent created on 12/23/2021
@@ -16,7 +17,6 @@ import java.util.Map;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @Data
 @Document
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -25,8 +25,7 @@ public class ProductQuoteEvent implements Serializable {
     private static final String CONNECT_CONNECTED_EVENT = "connect.connected";
     private static final String TRADING_QUOTE_EVENT = "trading.quote";
 
-    @Id
-    private String eventId;
+    @Id private String eventId;
     private String t = "";
     private Map<String, Object> body = new HashMap<>();
 

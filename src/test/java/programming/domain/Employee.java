@@ -1,8 +1,8 @@
+/* (C) 2023 */
 package programming.domain;
 
-import org.json.JSONObject;
-
 import java.io.Serializable;
+import org.json.JSONObject;
 
 public class Employee implements Serializable, Cloneable {
 
@@ -48,8 +48,7 @@ public class Employee implements Serializable, Cloneable {
             if (other.name != null) {
                 return false;
             }
-        }
-        else if (!name.equals(other.name)) {
+        } else if (!name.equals(other.name)) {
             return false;
         }
         return true;
@@ -84,16 +83,14 @@ public class Employee implements Serializable, Cloneable {
     }
 
     /**
-     * @param empId
-     *            the empId to set
+     * @param empId the empId to set
      */
     public void setEmpId(int empId) {
         this.empId = empId;
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -103,5 +100,4 @@ public class Employee implements Serializable, Cloneable {
     public String toString() {
         return new JSONObject(this).toString();
     }
-
 }

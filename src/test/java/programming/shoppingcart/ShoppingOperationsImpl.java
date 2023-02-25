@@ -1,7 +1,4 @@
-/**
- * Copyright (c) @Sanjeev Saxena 2017. All Rights Reserved.
- */
-
+/* (C) 2017 */
 package programming.shoppingcart;
 
 import java.math.BigDecimal;
@@ -15,16 +12,13 @@ import java.util.Map.Entry;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class ShoppingOperationsImpl implements ShoppingOperation {
 
     private final ItemRepository itemRepo;
     private final List<Item> items;
     private final Map<Item, Integer> itemCountMap;
 
-    /**
-     *
-     */
+    /** */
     public ShoppingOperationsImpl(ItemRepository itemRepo) {
         this.itemRepo = itemRepo;
         this.items = new ArrayList<>();
@@ -66,11 +60,17 @@ public class ShoppingOperationsImpl implements ShoppingOperation {
         BigDecimal sum = new BigDecimal("0.00");
         for (final Entry<Item, Integer> entry : itemCountMap.entrySet()) {
 
-            final BigDecimal totalItemPrice = entry.getKey().getPrice().multiply(new BigDecimal(entry.getValue()));
+            final BigDecimal totalItemPrice =
+                    entry.getKey().getPrice().multiply(new BigDecimal(entry.getValue()));
 
             // 3 x Apple @ 1.30 = 3.90
-            System.out.println(String.format("%s x %s @ %s = %s", entry.getValue(), entry.getKey().getName(),
-                    entry.getKey().getPrice(), totalItemPrice));
+            System.out.println(
+                    String.format(
+                            "%s x %s @ %s = %s",
+                            entry.getValue(),
+                            entry.getKey().getName(),
+                            entry.getKey().getPrice(),
+                            totalItemPrice));
             sum = sum.add(totalItemPrice);
         }
         System.out.println(String.format("Sum : %s", sum.toString()));
@@ -86,5 +86,4 @@ public class ShoppingOperationsImpl implements ShoppingOperation {
             itemCountMap.put(newItem, value);
         }
     }
-
 }

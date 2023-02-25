@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package programming.problemsolving;
 
 import org.junit.Assert;
@@ -12,17 +13,16 @@ import org.slf4j.LoggerFactory;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public class HayStackNeedleTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     /**
      * Find occurrence position of given needle string m of size k in haystack n
-     * <p>
-     * Input 2, na, banananobanono
-     * <p>
-     * Output 2,4
+     *
+     * <p>Input 2, na, banananobanono
+     *
+     * <p>Output 2,4
      */
     @Test
     public void testCase1() {
@@ -62,5 +62,4 @@ public class HayStackNeedleTest {
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
-
 }

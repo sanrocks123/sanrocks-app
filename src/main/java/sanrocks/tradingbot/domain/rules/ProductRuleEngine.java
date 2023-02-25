@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.domain.rules;
 
 import java.util.Map;
@@ -33,9 +34,10 @@ public final class ProductRuleEngine {
         Map<Rule, Boolean> result = getRulesEngine().check(getRules(), facts);
 
         JSONObject formattedResult = new JSONObject();
-        result.forEach((k, v) -> {
-            formattedResult.put(k.getName(), v);
-        });
+        result.forEach(
+                (k, v) -> {
+                    formattedResult.put(k.getName(), v);
+                });
 
         log.info("doCheck: {}", formattedResult.toString(4));
         return result;

@@ -1,5 +1,5 @@
+/* (C) 2023 */
 package programming.problemsolving;
-
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public class FacebookPuzzleTest {
 
     /**
@@ -62,9 +61,9 @@ public class FacebookPuzzleTest {
             hash.add(Long.valueOf(i));
             seatsAvailable++;
 
-            System.out.printf("current seat found: %d, seatsAvailable: %d, seatsSoFar: %s\n", i,
-                seatsAvailable, hash);
-
+            System.out.printf(
+                    "current seat found: %d, seatsAvailable: %d, seatsSoFar: %s\n",
+                    i, seatsAvailable, hash);
         }
         return seatsAvailable;
     }
@@ -77,5 +76,4 @@ public class FacebookPuzzleTest {
         final long[] S1 = {11, 6, 14};
         Assert.assertEquals(1, getMaxAdditionalDinersCount(15, 2, 3, S1));
     }
-
 }

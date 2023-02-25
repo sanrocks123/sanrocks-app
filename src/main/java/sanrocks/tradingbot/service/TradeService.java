@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.service;
 
 import sanrocks.tradingbot.domain.Trade;
@@ -9,7 +10,6 @@ import sanrocks.tradingbot.domain.Trade;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public interface TradeService {
 
     /**
@@ -23,5 +23,4 @@ public interface TradeService {
      * @return
      */
     Trade sell(final String positionId);
-
 }

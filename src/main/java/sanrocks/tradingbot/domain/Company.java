@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.domain;
 
 import com.google.gson.Gson;
@@ -16,8 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor
 public class Company {
 
-    @Id
-    private String id;
+    @Id private String id;
     private String name;
 
     @Field("email_address")
@@ -25,6 +25,7 @@ public class Company {
 
     @Field("phone_number")
     private String phoneNumber;
+
     private String description;
     private String url;
 
@@ -36,4 +37,3 @@ public class Company {
         return new Gson().toJson(this);
     }
 }
-

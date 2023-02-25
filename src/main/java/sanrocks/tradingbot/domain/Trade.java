@@ -1,13 +1,13 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.domain;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.json.JSONObject;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import org.json.JSONObject;
 
 /**
  * Java Source Trade created on 12/23/2021
@@ -16,7 +16,6 @@ import java.util.Map;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Trade implements Serializable {
 
@@ -65,5 +64,4 @@ public class Trade implements Serializable {
     public String toString() {
         return new JSONObject(this).toString();
     }
-
 }

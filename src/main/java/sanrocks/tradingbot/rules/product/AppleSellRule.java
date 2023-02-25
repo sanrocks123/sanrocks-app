@@ -1,5 +1,5 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.rules.product;
-
 
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,10 @@ import sanrocks.tradingbot.domain.Trade;
 
 @Slf4j
 @Component
-@Rule(name = "when_targetSellPriceMatched_then_applyTrades", description = "apple product sell condition", priority = 0)
+@Rule(
+        name = "when_targetSellPriceMatched_then_applyTrades",
+        description = "apple product sell condition",
+        priority = 0)
 public class AppleSellRule extends ProductBaseRules {
 
     @Condition
@@ -35,5 +38,4 @@ public class AppleSellRule extends ProductBaseRules {
 
         log.info("when_targetSellPriceMatched_then_applyTrades : {}", product.toString(4));
     }
-
 }

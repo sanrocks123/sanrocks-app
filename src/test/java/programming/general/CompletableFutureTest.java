@@ -1,10 +1,10 @@
+/* (C) 2023 */
 package programming.general;
 
+import java.util.concurrent.CompletableFuture;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Java Source CompletableFutureTest.java created on Feb 19, 2020
@@ -13,7 +13,6 @@ import java.util.concurrent.CompletableFuture;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class CompletableFutureTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -22,7 +21,5 @@ public class CompletableFutureTest {
     public void testCompletableFuture() {
 
         CompletableFuture.runAsync(() -> log.info("hello world"));
-
     }
-
 }

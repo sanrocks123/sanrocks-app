@@ -1,11 +1,11 @@
+/* (C) 2023 */
 package programming.algos;
-
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * Java Source GreedyTest.java created on Jul 23, 2021
@@ -14,9 +14,7 @@ import java.util.Set;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public class GreedyTest {
-
 
     @Test
     public void testFindmaximumMeetings() {
@@ -34,14 +32,12 @@ public class GreedyTest {
         }
     }
 
-
     /**
      * int[] start_times = {10, 11, 13, 12, 12, 13};
-     * <p>
-     * int[] end_times = {12, 13, 14, 14, 13, 14};
-     * <p>
-     * Maximum possible shows: Movie 1: 10-12, Movie 5: 12-13 ,Movie 3 or Movie
-     * 6: 13-14
+     *
+     * <p>int[] end_times = {12, 13, 14, 14, 13, 14};
+     *
+     * <p>Maximum possible shows: Movie 1: 10-12, Movie 5: 12-13 ,Movie 3 or Movie 6: 13-14
      */
     @Test
     public void testGetMaximumMoviesCount() {
@@ -138,7 +134,5 @@ public class GreedyTest {
                 }
             }
         }
-
     }
-
 }

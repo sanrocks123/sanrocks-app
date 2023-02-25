@@ -1,17 +1,13 @@
-/**
- * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
- */
-
+/* (C) 2019 */
 package programming.general;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import org.junit.Assert;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Java Source DataTypeTest.java created on Dec 19, 2019
@@ -20,7 +16,6 @@ import java.math.RoundingMode;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class DataTypeTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -38,7 +33,6 @@ public class DataTypeTest {
         final BigDecimal b2 = new BigDecimal(0.02);
 
         log.info("b2-b1 {}", b2.subtract(b1).round(MathContext.DECIMAL32));
-
     }
 
     @Test
@@ -104,5 +98,4 @@ public class DataTypeTest {
         a.setScale(2, RoundingMode.UP);
         log.info("a+b = {}", a.add(b, MathContext.DECIMAL64));
     }
-
 }

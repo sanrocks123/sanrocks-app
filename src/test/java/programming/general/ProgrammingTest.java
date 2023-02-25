@@ -1,19 +1,15 @@
-/**
- * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
- */
-
+/* (C) 2019 */
 package programming.general;
-
-import org.junit.Ignore;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Java Source ProgrammingTest.java created on Dec 19, 2019
@@ -22,7 +18,6 @@ import java.util.Scanner;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class ProgrammingTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -53,7 +48,10 @@ public class ProgrammingTest {
             for (int j = 0; j < a.length; j++) {
                 if (a[j].contains(currentChar)) {
                     final String temp = a[j].replace(currentChar, "");
-                    log.info("match found in array, removed current char {}, o/p {}", currentChar, temp);
+                    log.info(
+                            "match found in array, removed current char {}, o/p {}",
+                            currentChar,
+                            temp);
                     a[j] = temp;
                     a[j + 1] = a[j + 1] + currentChar;
 
@@ -97,12 +95,9 @@ public class ProgrammingTest {
                 System.out.println("NO");
             }
         }
-
     }
 
-    /**
-     *
-     */
+    /** */
     @Ignore
     @Test
     public void testSweetness() {
@@ -122,7 +117,8 @@ public class ProgrammingTest {
 
                 currentSweetnes = C * j * Math.sqrt(Double.valueOf(j)) * Math.log(j) / log2;
                 System.out.println(
-                        MessageFormat.format("j={0}, currentSweetness={1}", new Object[] { j, currentSweetnes }));
+                        MessageFormat.format(
+                                "j={0}, currentSweetness={1}", new Object[] {j, currentSweetnes}));
 
                 if (currentSweetnes > S) {
                     System.out.println(j - 1);

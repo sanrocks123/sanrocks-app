@@ -1,7 +1,4 @@
-/**
- * Copyright (c) @Sanjeev Saxena 2017. All Rights Reserved.
- */
-
+/* (C) 2017 */
 package programming.shoppingcart;
 
 import java.math.BigDecimal;
@@ -13,7 +10,6 @@ import java.math.BigDecimal;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class Item {
 
     private String barCode;
@@ -53,16 +49,14 @@ public class Item {
             if (other.barCode != null) {
                 return false;
             }
-        }
-        else if (!barCode.equals(other.barCode)) {
+        } else if (!barCode.equals(other.barCode)) {
             return false;
         }
         if (name == null) {
             if (other.name != null) {
                 return false;
             }
-        }
-        else if (!name.equals(other.name)) {
+        } else if (!name.equals(other.name)) {
             return false;
         }
         return true;
@@ -111,35 +105,30 @@ public class Item {
     }
 
     /**
-     * @param barCode
-     *            the barCode to set
+     * @param barCode the barCode to set
      */
     public void setBarCode(String barCode) {
         this.barCode = barCode;
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @param price
-     *            the price to set
+     * @param price the price to set
      */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
     /**
-     * @param qty
-     *            the qty to set
+     * @param qty the qty to set
      */
     public void setQty(int qty) {
         this.qty = qty;
     }
-
 }

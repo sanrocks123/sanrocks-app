@@ -1,16 +1,12 @@
-/**
- * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
- */
-
+/* (C) 2019 */
 package programming.algos;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Java Source StringManipulationTest.java created on Dec 23, 2019
@@ -19,7 +15,6 @@ import java.util.Map;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class StringTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -95,19 +90,16 @@ public class StringTest {
                 final int a = Character.isUpperCase(ch) ? 65 : 97;
                 final char c = (char) ((ch + rotationFactor - a) % 26 + a);
                 sb.append(Character.valueOf(c));
-            }
-
-            else if (Character.isDigit(ch)) {
+            } else if (Character.isDigit(ch)) {
                 final char n = (char) ((ch + rotationFactor - 48) % 10 + 48);
                 sb.append(Character.valueOf(n));
-            }
-
-            else {
+            } else {
                 sb.append(ch);
             }
         }
 
-        System.out.printf("input: %s\nexpected: %s \noutput: %s \n", input, expected, sb.toString());
+        System.out.printf(
+                "input: %s\nexpected: %s \noutput: %s \n", input, expected, sb.toString());
     }
 
     @Test
@@ -128,7 +120,6 @@ public class StringTest {
      */
     private void hello(Object object) {
         log.debug("object: {}", object);
-
     }
 
     /**

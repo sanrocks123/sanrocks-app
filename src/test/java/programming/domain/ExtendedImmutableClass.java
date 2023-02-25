@@ -1,14 +1,13 @@
+/* (C) 2023 */
 package programming.domain;
 
 /**
- *
  * Java Source ExtendedImmutableClass.java created on Jan 4, 2020
  *
  * @author : Sanjeev Saxena
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class ExtendedImmutableClass extends ImmutableClass {
     int overrideId;
 
@@ -36,5 +35,4 @@ public class ExtendedImmutableClass extends ImmutableClass {
     public void setId(int id) {
         this.overrideId = id;
     }
-
 }

@@ -1,16 +1,12 @@
-/**
- * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
- */
-
+/* (C) 2019 */
 package programming.designpatterns;
-
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Java Source ThreadPoolTest.java created on Dec 24, 2019
@@ -19,7 +15,6 @@ import java.util.concurrent.TimeUnit;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class ThreadPoolTest {
 
     private class MyThreadPoolService {
@@ -28,7 +23,6 @@ public class ThreadPoolTest {
         private volatile boolean isRunning = true;
 
         /**
-         *
          * @param threads
          */
         public MyThreadPoolService(int threads) {
@@ -39,24 +33,20 @@ public class ThreadPoolTest {
         }
 
         /**
-         *
          * @param task
          */
         public void execute(Runnable task) {
             if (isRunning) {
                 try {
                     taskQueue.offer(task, 5, TimeUnit.SECONDS);
-                }
-                catch (final InterruptedException e) {
+                } catch (final InterruptedException e) {
                     log.error("Failure to submit task");
                 }
             }
             log.info("Stopped accepting new tasks");
         }
 
-        /**
-         *
-         */
+        /** */
         public void stop() {
             isRunning = false;
             log.info("Execution stop requested");
@@ -74,16 +64,13 @@ public class ThreadPoolTest {
             this.myThreadPoolService = myThreadPoolService;
         }
 
-        /**
-         *
-         */
+        /** */
         @Override
         public void run() {
             while (this.myThreadPoolService.isRunning) {
                 try {
                     this.myThreadPoolService.taskQueue.poll(5, TimeUnit.SECONDS).run();
-                }
-                catch (final InterruptedException e) {
+                } catch (final InterruptedException e) {
                     log.error("Error executing task");
                 }
             }
@@ -93,25 +80,23 @@ public class ThreadPoolTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    /**
-     *
-     */
+    /** */
     @Test
     // @Ignore
     public void testStartPool() {
         final MyThreadPoolService poolService = new MyThreadPoolService(5);
 
         for (int i = 0; i < 10; i++) {
-            poolService.execute(() -> {
-                try {
-                    log.info("Picked up for execution");
-                    TimeUnit.SECONDS.sleep(5);
-                    log.info("Done!!");
-                }
-                catch (final InterruptedException e) {
-                    log.error("Error running your task", e);
-                }
-            });
+            poolService.execute(
+                    () -> {
+                        try {
+                            log.info("Picked up for execution");
+                            TimeUnit.SECONDS.sleep(5);
+                            log.info("Done!!");
+                        } catch (final InterruptedException e) {
+                            log.error("Error running your task", e);
+                        }
+                    });
         }
         poolService.stop();
     }

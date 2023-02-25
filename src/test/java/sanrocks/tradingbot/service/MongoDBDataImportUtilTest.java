@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.service;
 
 import com.mongodb.ConnectionString;
@@ -8,19 +9,18 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.BulkWriteOptions;
 import com.mongodb.client.model.InsertOneModel;
-import lombok.extern.slf4j.Slf4j;
-import org.bson.Document;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.springframework.data.mongodb.core.MongoTemplate;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+import org.bson.Document;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 @Disabled
 @Slf4j
@@ -31,9 +31,8 @@ public class MongoDBDataImportUtilTest {
     @BeforeEach
     public void setup() {
         ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017");
-        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
-                .applyConnectionString(connectionString)
-                .build();
+        MongoClientSettings mongoClientSettings =
+                MongoClientSettings.builder().applyConnectionString(connectionString).build();
         mongoTemplate = new MongoTemplate(MongoClients.create(mongoClientSettings), "tradedb");
     }
 
@@ -45,17 +44,19 @@ public class MongoDBDataImportUtilTest {
         }
     }
 
-
     private void doImport(String collectionName) {
-        String dataset = String.format("/Users/sanrocks/git-repos/mongodb-json-files/datasets/%s.json", collectionName);
+        String dataset =
+                String.format(
+                        "/Users/sanrocks/git-repos/mongodb-json-files/datasets/%s.json",
+                        collectionName);
         MongoCollection<Document> coll = mongoTemplate.getCollection(collectionName);
 
         try {
 
-            //drop previous import
+            // drop previous import
             coll.drop();
 
-            //Bulk Approach:
+            // Bulk Approach:
             int count = 0;
             int batch = 100;
             List<InsertOneModel<Document>> docs = new ArrayList<>();
@@ -63,7 +64,7 @@ public class MongoDBDataImportUtilTest {
             try (BufferedReader br = new BufferedReader(new FileReader(dataset))) {
                 String line;
                 while ((line = br.readLine()) != null) {
-                    //log.info("line : {}", line);
+                    // log.info("line : {}", line);
                     docs.add(new InsertOneModel<>(Document.parse(line)));
                     count++;
                     if (count == batch) {
@@ -79,7 +80,8 @@ public class MongoDBDataImportUtilTest {
             }
 
             if (count > 0) {
-                BulkWriteResult bulkWriteResult = coll.bulkWrite(docs, new BulkWriteOptions().ordered(false));
+                BulkWriteResult bulkWriteResult =
+                        coll.bulkWrite(docs, new BulkWriteOptions().ordered(false));
                 log.info("Inserted" + bulkWriteResult);
             }
 
@@ -87,5 +89,4 @@ public class MongoDBDataImportUtilTest {
             log.error("Error");
         }
     }
-
 }

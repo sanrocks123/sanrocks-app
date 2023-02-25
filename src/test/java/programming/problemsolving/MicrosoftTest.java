@@ -1,10 +1,10 @@
+/* (C) 2023 */
 package programming.problemsolving;
-
-import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Test;
 
 /**
  * Java Source MicrosoftTest.java created on Jun 8, 2021
@@ -13,7 +13,6 @@ import java.util.List;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public class MicrosoftTest {
 
     @Test
@@ -34,29 +33,47 @@ public class MicrosoftTest {
 
         final LocalDate lastModified = LocalDate.parse("1990-01-31");
 
-        final int min = files.stream().filter(s -> {
-            final String token[] = s.trim().split(" ");
-            final String size = token[0];
-            final String date = token[1];
-            final String fileName = token[2];
+        final int min =
+                files.stream()
+                        .filter(
+                                s -> {
+                                    final String token[] = s.trim().split(" ");
+                                    final String size = token[0];
+                                    final String date = token[1];
+                                    final String fileName = token[2];
 
-            final Integer iSize = Integer.parseInt(size.trim().replaceAll("[^-?0-9]+", " ").trim());
-            final boolean isSizeValid = size.contains("M") && iSize < 14 || size.contains("K") ? true : false;
+                                    final Integer iSize =
+                                            Integer.parseInt(
+                                                    size.trim()
+                                                            .replaceAll("[^-?0-9]+", " ")
+                                                            .trim());
+                                    final boolean isSizeValid =
+                                            size.contains("M") && iSize < 14 || size.contains("K")
+                                                    ? true
+                                                    : false;
 
-            final boolean isAfter = LocalDate.parse(date.trim()).isAfter(lastModified);
-            final boolean isBackup = fileName.trim().endsWith("~");
+                                    final boolean isAfter =
+                                            LocalDate.parse(date.trim()).isAfter(lastModified);
+                                    final boolean isBackup = fileName.trim().endsWith("~");
 
-            return isSizeValid && isAfter && isBackup;
-
-        }).map(f -> {
-            final String token[] = f.trim().split(" ");
-            final String fileName = token[2];
-            return fileName.substring(0, fileName.lastIndexOf("."));
-        }).peek(f -> {
-            System.out.println(f);
-        }).mapToInt(f -> {
-            return f.length();
-        }).min().getAsInt();
+                                    return isSizeValid && isAfter && isBackup;
+                                })
+                        .map(
+                                f -> {
+                                    final String token[] = f.trim().split(" ");
+                                    final String fileName = token[2];
+                                    return fileName.substring(0, fileName.lastIndexOf("."));
+                                })
+                        .peek(
+                                f -> {
+                                    System.out.println(f);
+                                })
+                        .mapToInt(
+                                f -> {
+                                    return f.length();
+                                })
+                        .min()
+                        .getAsInt();
 
         System.out.println(String.valueOf(min));
     }

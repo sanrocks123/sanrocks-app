@@ -1,14 +1,13 @@
+/* (C) 2023 */
 package programming.algos;
-
-
-import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 /**
  * Java Source ArraysTest.java created on Jun 5, 2021
@@ -17,10 +16,8 @@ import java.util.stream.Collectors;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @Slf4j
 public class ArraysTest {
-
 
     @Test
     public void testArrayAlternateSorting() {
@@ -60,7 +57,6 @@ public class ArraysTest {
         for (final int a : arr) {
             System.out.print(a);
         }
-
     }
 
     @Test
@@ -111,13 +107,16 @@ public class ArraysTest {
     public void testLargestNumberFormed() {
         final int arr[] = {1, 34, 3, 98, 9, 76, 45, 4};
 
-        final List<String> arrList = Arrays.stream(arr).mapToObj(a -> String.valueOf(a)).collect(Collectors.toList());
+        final List<String> arrList =
+                Arrays.stream(arr).mapToObj(a -> String.valueOf(a)).collect(Collectors.toList());
 
-        Collections.sort(arrList, (o1, o2) -> {
-            final String a = o1 + o2;
-            final String b = o2 + o1;
-            return a.compareTo(b) > 0 ? -1 : 1;
-        });
+        Collections.sort(
+                arrList,
+                (o1, o2) -> {
+                    final String a = o1 + o2;
+                    final String b = o2 + o1;
+                    return a.compareTo(b) > 0 ? -1 : 1;
+                });
 
         System.out.printf("expected: [998764543431], actual: [%s]", arrList);
     }
@@ -128,7 +127,7 @@ public class ArraysTest {
     @Test
     public void testLargestSumContigousSubarray() {
 
-        final int a[] = new int[]{-2, -3, 4, -1, -2, 1, 5, -3};
+        final int a[] = new int[] {-2, -3, 4, -1, -2, 1, 5, -3};
 
         int sum = 0;
         int currentSum = 0;
@@ -149,7 +148,7 @@ public class ArraysTest {
     @Test
     public void testProductArrayPuzzleTest() {
 
-        final int a[] = new int[]{10, 3, 5, 6, 2};
+        final int a[] = new int[] {10, 3, 5, 6, 2};
         final int r[] = new int[a.length];
         for (int i = 0; i <= a.length - 1; i++) {
 
@@ -159,13 +158,12 @@ public class ArraysTest {
         for (int i = 0; i <= r.length - 1; i++) {
             log.info("a[{}] : {}", i, r[i]);
         }
-
     }
 
     @Test
     public void testReverse() {
 
-        final int a[] = new int[]{1, 2, 3, 4, 5};
+        final int a[] = new int[] {1, 2, 3, 4, 5};
 
         for (final Integer i : a) {
             log.info("before reversal : {}", i);
@@ -201,7 +199,6 @@ public class ArraysTest {
         for (final int e : arr) {
             System.out.print(e);
         }
-
     }
 
     /**
@@ -221,5 +218,4 @@ public class ArraysTest {
 
         return result;
     }
-
 }

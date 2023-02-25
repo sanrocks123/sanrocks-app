@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.util;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
@@ -13,5 +14,4 @@ public class CompanyUrlResolver implements GraphQLResolver<Company> {
         log.info("getUrl, companyId : [{}]", company.getId());
         return "http://base:port/v1/companies";
     }
-
 }

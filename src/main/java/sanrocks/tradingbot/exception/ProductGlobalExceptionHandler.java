@@ -1,7 +1,6 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.exception;
 
-import sanrocks.tradingbot.domain.ErrorResponse;
-import sanrocks.tradingbot.util.TradeBotUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -9,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpStatusCodeException;
+import sanrocks.tradingbot.domain.ErrorResponse;
+import sanrocks.tradingbot.util.TradeBotUtils;
 
 /**
  * Java Source ProductGlobalExceptionHandler created on 12/24/2021
@@ -17,7 +18,6 @@ import org.springframework.web.client.HttpStatusCodeException;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @ControllerAdvice
 public class ProductGlobalExceptionHandler {
 
@@ -45,8 +45,10 @@ public class ProductGlobalExceptionHandler {
     @ExceptionHandler(Throwable.class)
     ResponseEntity<ErrorResponse> handleApplication(Throwable ex) {
         log.error("handleApplication", ex);
-        ErrorResponse response = new ErrorResponse(String.format("Oops! something went wrong - [%s]", ex.getMessage()), "INTERNAL_SERVER_ERROR");
+        ErrorResponse response =
+                new ErrorResponse(
+                        String.format("Oops! something went wrong - [%s]", ex.getMessage()),
+                        "INTERNAL_SERVER_ERROR");
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }

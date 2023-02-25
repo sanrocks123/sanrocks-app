@@ -1,15 +1,14 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.exception;
 
 import graphql.ErrorType;
 import graphql.GraphQLError;
 import graphql.language.SourceLocation;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CommonBaseAbstractException extends RuntimeException implements GraphQLError {
-
 
     private Map<String, Object> extensions = new HashMap();
 
@@ -43,5 +42,4 @@ public class CommonBaseAbstractException extends RuntimeException implements Gra
     public Map<String, Object> getExtensions() {
         return this.extensions;
     }
-
 }

@@ -1,23 +1,23 @@
+/* (C) 2023 */
 package programming.algos;
-
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 
 @Slf4j
 public class DynamicProgrammingTest {
 
     /**
      * Input: l = 11, p = 2, q = 3, r = 5 Output: 5 Segments of 2, 2, 2, 2 and 3
-     * <p>
-     * Input: l = 7, p = 2, q = 5, r = 5 Output: 2 Segments of 2 and 5
+     *
+     * <p>Input: l = 7, p = 2, q = 5, r = 5 Output: 2 Segments of 2 and 5
      */
     @Test
     public void testMaximizeCutSegments() {
-        //int arr[] = {11, 2, 3, 5};
-        //int arr[] = {7, 2, 5, 5};
+        // int arr[] = {11, 2, 3, 5};
+        // int arr[] = {7, 2, 5, 5};
 
         int arr[] = {4, 2, 1, 1};
 
@@ -26,19 +26,26 @@ public class DynamicProgrammingTest {
             map.put(arr[i], new ArrayList<>());
         }
 
-        int max = map.keySet().stream().mapToInt(k -> {
-            return findMaxCuts(arr[0], k, map);
-        }).max().getAsInt();
+        int max =
+                map.keySet().stream()
+                        .mapToInt(
+                                k -> {
+                                    return findMaxCuts(arr[0], k, map);
+                                })
+                        .max()
+                        .getAsInt();
 
         log.info("max cuts: {}", max);
     }
 
     private int findMaxCuts(final int n, final Integer k, final Map<Integer, List<Integer>> map) {
 
-        map.compute(k, (x, y) -> {
-            y.add(n);
-            return y;
-        });
+        map.compute(
+                k,
+                (x, y) -> {
+                    y.add(n);
+                    return y;
+                });
 
         int remainder = n - k;
         if (remainder <= 0) {
@@ -57,11 +64,11 @@ public class DynamicProgrammingTest {
     }
 
     /**
-     * Input: N = 5 P[] = {5  24 , 39 60 , 15 28 , 27 40 , 50 90}
-     * <p>
-     * Output: 3
-     * <p>
-     * Explanation: The given pairs are { {5, 24}, {39, 60}, {15, 28}, {27, 40}, {50, 90} },the
+     * Input: N = 5 P[] = {5 24 , 39 60 , 15 28 , 27 40 , 50 90}
+     *
+     * <p>Output: 3
+     *
+     * <p>Explanation: The given pairs are { {5, 24}, {39, 60}, {15, 28}, {27, 40}, {50, 90} },the
      * longest chain that can be formed is of length 3, and the chain is {{5, 24}, {27, 40}, {50,
      * 90}}
      */
@@ -105,7 +112,6 @@ public class DynamicProgrammingTest {
                 }
                 log.info("i: {}, v:{}, res: {}", i, V, res);
             }
-
         }
         log.info("return res: {}", res);
         return res;

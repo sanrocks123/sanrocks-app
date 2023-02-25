@@ -1,7 +1,4 @@
-/**
- * Copyright (c) @Sanjeev Saxena 2017. All Rights Reserved.
- */
-
+/* (C) 2017 */
 package programming.shoppingcart;
 
 import java.math.BigDecimal;
@@ -15,14 +12,11 @@ import java.util.Map;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class ItemTestDataRepositoryImpl implements ItemRepository {
 
     private final Map<String, Item> items = new HashMap<>();
 
-    /**
-     *
-     */
+    /** */
     public ItemTestDataRepositoryImpl() {
         items.put("01001", new Item("01001", "Lemon", new BigDecimal("1.60")));
         items.put("01002", new Item("01003", "Apple", new BigDecimal("1.30")));
@@ -38,5 +32,4 @@ public class ItemTestDataRepositoryImpl implements ItemRepository {
     public Item getItemByCode(String code) {
         return items.get(code);
     }
-
 }

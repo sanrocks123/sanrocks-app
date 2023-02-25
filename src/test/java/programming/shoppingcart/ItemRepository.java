@@ -1,7 +1,4 @@
-/**
- * Copyright (c) @Sanjeev Saxena 2017. All Rights Reserved.
- */
-
+/* (C) 2017 */
 package programming.shoppingcart;
 
 /**
@@ -11,13 +8,10 @@ package programming.shoppingcart;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public interface ItemRepository {
 
     /**
-     *
      * @return
      */
     public Item getItemByCode(String code);
-
 }

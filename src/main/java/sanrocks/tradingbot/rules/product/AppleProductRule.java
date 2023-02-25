@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.rules.product;
 
 import java.math.BigDecimal;
@@ -11,7 +12,10 @@ import sanrocks.tradingbot.domain.Product;
 
 @Slf4j
 @Component
-@Rule(name = "when_appleProductMatched_then_applySellPricingLimits", description = "calculate apple pricing", priority = 1)
+@Rule(
+        name = "when_appleProductMatched_then_applySellPricingLimits",
+        description = "calculate apple pricing",
+        priority = 1)
 public class AppleProductRule extends ProductBaseRules {
 
     @Condition
@@ -20,13 +24,13 @@ public class AppleProductRule extends ProductBaseRules {
     }
 
     @Action
-    public void applySellPricingLimit(@Fact("product") Product product,
-        @Fact("buyPrice") BigDecimal buyPrice) {
+    public void applySellPricingLimit(
+            @Fact("product") Product product, @Fact("buyPrice") BigDecimal buyPrice) {
 
         product.setBuyPrice(buyPrice);
 
         log.info("when_applyProductMatched_then_applySellPricingLimits {}", product.toString(4));
 
-        //throw new RuntimeException("Rule apply failure");
+        // throw new RuntimeException("Rule apply failure");
     }
 }

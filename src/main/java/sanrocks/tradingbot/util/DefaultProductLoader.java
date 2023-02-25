@@ -1,19 +1,19 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.util;
 
-import sanrocks.tradingbot.domain.Product;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
+import javax.annotation.PostConstruct;
 import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
+import sanrocks.tradingbot.domain.Product;
 
 /**
  * Java Source DefaultProductLoader created on 12/23/2021
@@ -22,7 +22,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @Component
 public class DefaultProductLoader {
 
@@ -31,24 +30,23 @@ public class DefaultProductLoader {
     private final Map<String, Product> products = new ConcurrentHashMap<>();
     private final List<String> subscriptions = new ArrayList<>();
 
-    @Autowired
-    private Environment env;
+    @Autowired private Environment env;
 
     @PostConstruct
     public void init() {
         loadDefaults();
     }
 
-    /**
-     * load defaults at startup
-     */
+    /** load defaults at startup */
     private void loadDefaults() {
 
-        JSONArray products = TradeBotUtils.getNodeByName("products").getJSONArray(env.getActiveProfiles()[0]);
+        JSONArray products =
+                TradeBotUtils.getNodeByName("products").getJSONArray(env.getActiveProfiles()[0]);
         Random random = new Random();
 
         for (int i = 0; i < products.length(); i++) {
-            Product p = TradeBotUtils.deserialize(products.getJSONObject(i).toString(), Product.class);
+            Product p =
+                    TradeBotUtils.deserialize(products.getJSONObject(i).toString(), Product.class);
             setRandomBuyPrice(random, p);
             this.products.put(p.getProductId(), p);
             this.subscriptions.add(String.format("trading.product.%s", p.getProductId()));
@@ -63,15 +61,13 @@ public class DefaultProductLoader {
      */
     private void setRandomBuyPrice(final Random random, final Product p) {
 
-        if (p.getPriceChangeList().isEmpty())
-            return;
+        if (p.getPriceChangeList().isEmpty()) return;
 
         int priceIdx = random.nextInt(p.getPriceChangeList().size());
         p.setBuyPrice(p.getPriceChangeList().get(priceIdx));
         p.getPriceChangeList().clear();
         p.setCurrentPrice(null);
     }
-
 
     /**
      * @return
@@ -86,5 +82,4 @@ public class DefaultProductLoader {
     public Map<String, Product> getProducts() {
         return products;
     }
-
 }

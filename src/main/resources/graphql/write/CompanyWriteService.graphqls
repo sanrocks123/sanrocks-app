@@ -12,8 +12,11 @@ input CompanyInput {
     # the phone number
     phoneNumber: String
     description: String
+
     url: String
     tweet: TweetInput
+
+    #date: date
 }
 
 #tweet composition

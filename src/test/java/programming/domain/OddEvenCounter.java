@@ -1,7 +1,4 @@
-/**
- * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
- */
-
+/* (C) 2019 */
 package programming.domain;
 
 import java.util.concurrent.TimeUnit;
@@ -13,7 +10,6 @@ import java.util.concurrent.TimeUnit;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class OddEvenCounter {
 
     private int count;
@@ -30,15 +26,13 @@ public class OddEvenCounter {
 
     /**
      * @throws InterruptedException
-     *
      */
     @Override
     public void finalize() {
         System.out.println("finalize, OddEvenCounter object is about to be garbage collected");
         try {
             TimeUnit.SECONDS.sleep(5);
-        }
-        catch (final InterruptedException e) {
+        } catch (final InterruptedException e) {
             e.printStackTrace();
         }
         System.err.println("done with clean up");
@@ -59,9 +53,7 @@ public class OddEvenCounter {
         return this.count > max;
     }
 
-    /**
-     *
-     */
+    /** */
     public synchronized int printEven() {
         while (count % 2 != 0) {
             waitt();
@@ -69,9 +61,7 @@ public class OddEvenCounter {
         return update();
     }
 
-    /**
-    *
-    */
+    /** */
     public synchronized int printOdd() {
         while (count % 2 == 0) {
             waitt();
@@ -80,8 +70,7 @@ public class OddEvenCounter {
     }
 
     /**
-     * @param count
-     *            the count to set
+     * @param count the count to set
      */
     public void setCount(int count) {
         this.count = count;
@@ -97,16 +86,12 @@ public class OddEvenCounter {
         return value;
     }
 
-    /**
-     *
-     */
+    /** */
     private void waitt() {
         try {
             wait();
-        }
-        catch (final InterruptedException e) {
+        } catch (final InterruptedException e) {
             throw new RuntimeException(String.format("Error running waiting", e.getMessage()), e);
         }
     }
-
 }

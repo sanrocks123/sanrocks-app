@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.domain;
 
 import com.google.gson.Gson;
@@ -7,8 +8,7 @@ import org.springframework.data.annotation.Id;
 @Data
 public class Tweet {
 
-    @Id
-    private String id;
+    @Id private String id;
     private String text;
 
     public String toString() {
@@ -17,6 +17,4 @@ public class Tweet {
 }
 
 @Data
-class TweetInput extends Tweet {
-
-}
+class TweetInput extends Tweet {}

@@ -1,7 +1,4 @@
-/**
- * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
- */
-
+/* (C) 2019 */
 package programming.domain;
 
 /**
@@ -11,7 +8,6 @@ package programming.domain;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class OverloadingClass {
 
     private String name;
@@ -32,11 +28,9 @@ public class OverloadingClass {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
     }
-
 }

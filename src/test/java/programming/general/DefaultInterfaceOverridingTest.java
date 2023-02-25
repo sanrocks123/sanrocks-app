@@ -1,15 +1,11 @@
-/**
- * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
- */
-
+/* (C) 2019 */
 package programming.general;
 
 import org.junit.Test;
 
 class A {
 
-    public A(int i) {
-    }
+    public A(int i) {}
 
     protected void display() throws NullPointerException {
         System.out.println("A");
@@ -24,7 +20,6 @@ interface AA {
     }
 
     abstract void displaySAM();
-
 }
 
 class B extends A implements AA, BB {
@@ -48,7 +43,6 @@ class B extends A implements AA, BB {
     public void displaySAM() {
         // TODO Auto-generated method stub
     }
-
 }
 
 interface BB {
@@ -58,7 +52,6 @@ interface BB {
     }
 
     abstract void displaySAM();
-
 }
 
 public class DefaultInterfaceOverridingTest {
@@ -70,5 +63,4 @@ public class DefaultInterfaceOverridingTest {
 
         new B(10).defaultPrintMethod();
     }
-
 }

@@ -1,11 +1,11 @@
+/* (C) 2023 */
 package programming.algos;
-
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Java Source LinkedListTest.java created on Jun 3, 2021
@@ -14,7 +14,6 @@ import java.util.List;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public class LinkedListTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -30,14 +29,11 @@ public class LinkedListTest {
 
         public void printReverseList(Node node) {
 
-            if (node == null)
-                return;
-            else
-                printReverseList(node.next);
+            if (node == null) return;
+            else printReverseList(node.next);
             log.info("[{}]", node.data);
             System.out.print(node.data);
         }
-
     }
 
     @Test
@@ -51,11 +47,8 @@ public class LinkedListTest {
         List<String> names = Arrays.asList("a", "b", "c");
         System.out.println(names);
 
-        //names.add(0, "d");
+        // names.add(0, "d");
 
         System.out.print(names);
-
     }
-
-
 }

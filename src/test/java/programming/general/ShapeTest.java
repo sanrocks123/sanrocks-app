@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package programming.general;
 
 import org.junit.Test;
@@ -9,7 +10,6 @@ import org.junit.Test;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class ShapeTest {
 
     @Test
@@ -53,5 +53,4 @@ public class ShapeTest {
         stringReverse(currentPos, str);
         System.out.print(str.charAt(currentPos));
     }
-
 }

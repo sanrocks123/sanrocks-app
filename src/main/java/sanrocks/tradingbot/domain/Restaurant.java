@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.domain;
 
 import lombok.Builder;
@@ -11,8 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Builder
 public class Restaurant {
 
-    @Id
-    private String id;
+    @Id private String id;
     private String name;
 
     @Field("URL")
@@ -25,5 +25,4 @@ public class Restaurant {
 
     @Field("type_of_food")
     private String foodType;
-
 }

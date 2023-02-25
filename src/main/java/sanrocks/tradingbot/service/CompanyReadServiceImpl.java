@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.service;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
@@ -22,6 +23,7 @@ public class CompanyReadServiceImpl implements GraphQLQueryResolver, CompanyRead
 
     public Company getCompanyById(final String id) {
         log.info("http request: {}", httpServletRequest.getRequestURI());
+
         Optional<Company> result = companyRepository.findById(id);
 
         if (result.isEmpty()) {
@@ -35,5 +37,4 @@ public class CompanyReadServiceImpl implements GraphQLQueryResolver, CompanyRead
 
         return result.get();
     }
-
 }

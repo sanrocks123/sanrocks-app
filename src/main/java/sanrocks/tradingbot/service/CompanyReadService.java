@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.service;
 
 import sanrocks.tradingbot.domain.Company;

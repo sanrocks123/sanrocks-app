@@ -1,5 +1,8 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.service;
 
+import java.util.Arrays;
+import java.util.Locale;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import sanrocks.tradingbot.domain.Trade;
 import sanrocks.tradingbot.util.TradeBotUtils;
 
-import java.util.Arrays;
-import java.util.Locale;
-
 /**
  * Java Source TradeServiceImpl created on 12/23/2021
  *
@@ -21,14 +21,12 @@ import java.util.Locale;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @Service
 public class TradeServiceImpl implements TradeService {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private RestTemplate restTemplate;
+    @Autowired private RestTemplate restTemplate;
 
     @Value("${bux.trade.server}")
     private String buxTradeServer;
@@ -44,7 +42,8 @@ public class TradeServiceImpl implements TradeService {
     public Trade buy(String productId) {
 
         Trade trade = new Trade();
-        HttpEntity<String> entity = new HttpEntity<>(getBuyRequestPayload(productId).toString(), getHttpHeaders());
+        HttpEntity<String> entity =
+                new HttpEntity<>(getBuyRequestPayload(productId).toString(), getHttpHeaders());
 
         String url = String.format("%s%s", buxTradeServer, TradeBotUtils.BUY);
         log.debug("[{}] trade buy, request: {}", productId, entity);
@@ -56,7 +55,6 @@ public class TradeServiceImpl implements TradeService {
         return trade;
     }
 
-
     /**
      * @param positionId
      * @return
@@ -67,7 +65,9 @@ public class TradeServiceImpl implements TradeService {
         Trade trade = new Trade();
         HttpEntity<Void> entity = new HttpEntity<>(getHttpHeaders());
 
-        String url = String.format("%s%s", buxTradeServer, String.format(TradeBotUtils.SELL, positionId));
+        String url =
+                String.format(
+                        "%s%s", buxTradeServer, String.format(TradeBotUtils.SELL, positionId));
         log.debug("[{}] trade sell, entity: {}", positionId, entity);
 
         ResponseEntity<String> response = executeTradeAPI(url, HttpMethod.DELETE, entity);
@@ -100,14 +100,16 @@ public class TradeServiceImpl implements TradeService {
     }
 
     /**
-     * Note: - We can further apply retry & circuit breakers on external API calls but keeping it simple for assignment
+     * Note: - We can further apply retry & circuit breakers on external API calls but keeping it
+     * simple for assignment
      *
      * @param url
      * @param method
      * @param entity
      * @return
      */
-    private ResponseEntity<String> executeTradeAPI(final String url, final HttpMethod method, final HttpEntity<?> entity) {
+    private ResponseEntity<String> executeTradeAPI(
+            final String url, final HttpMethod method, final HttpEntity<?> entity) {
         return restTemplate.exchange(url, method, entity, String.class);
     }
 
@@ -116,7 +118,7 @@ public class TradeServiceImpl implements TradeService {
      * @param response
      */
     private Trade prepareTradeResponse(final Trade trade, final ResponseEntity<String> response) {
-        if (response.getStatusCode().equals(HttpStatus.OK)) {
+        if (HttpStatus.OK.equals(response.getStatusCode())) {
             JSONObject tradeResponse = new JSONObject(response.getBody());
             trade.setId(tradeResponse.getString("id"));
             trade.setPositionId(tradeResponse.getString("positionId"));

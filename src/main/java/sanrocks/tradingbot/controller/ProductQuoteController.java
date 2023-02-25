@@ -1,5 +1,8 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.controller;
 
+import java.time.Duration;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,19 +16,14 @@ import sanrocks.tradingbot.domain.ProductQuoteEvent;
 import sanrocks.tradingbot.repository.ProductQuoteEventReactiveRepository;
 import sanrocks.tradingbot.repository.ProductQuoteEventRepository;
 
-import java.time.Duration;
-import java.util.List;
-
 @RestController
 @RequestMapping("/v1/product-quote")
 @CrossOrigin
 public class ProductQuoteController {
 
-    @Autowired
-    private ProductQuoteEventReactiveRepository productQuoteEventReactiveRepository;
+    @Autowired private ProductQuoteEventReactiveRepository productQuoteEventReactiveRepository;
 
-    @Autowired
-    private ProductQuoteEventRepository productQuoteEventRepository;
+    @Autowired private ProductQuoteEventRepository productQuoteEventRepository;
 
     /**
      * @return

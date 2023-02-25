@@ -11,7 +11,11 @@ type Company {
     emailAddress: String
     # the phone number
     phoneNumber: String
+
+
     description: String
+
+    @deprecated
     url: String
     tweet: Tweet
 

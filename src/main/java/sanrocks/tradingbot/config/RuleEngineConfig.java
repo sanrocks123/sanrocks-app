@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.config;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class RuleEngineConfig {
         UnitRuleGroup unitRuleGroup = new UnitRuleGroup("product-sell-flow");
         productBaseRules.forEach(unitRuleGroup::addRule);
 
-        //rules.register(unitRuleGroup);
+        rules.register(unitRuleGroup);
         productBaseRules.forEach(rules::register);
 
         return new ProductRuleEngine(rules, new DefaultRulesEngine());

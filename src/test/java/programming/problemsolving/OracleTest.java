@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package programming.problemsolving;
 
 import org.junit.Test;
@@ -11,18 +12,15 @@ import org.slf4j.LoggerFactory;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class OracleTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    /**
-     *
-     */
+    /** */
     @Test
     public void testGeometriProgression() {
 
-        final int[] a = new int[] { 1, 3, 9, 9, 27, 81 };
+        final int[] a = new int[] {1, 3, 9, 9, 27, 81};
 
         for (int i = 0; i < a.length; i++) {
             log.info("-----  i:[{}], value:{}", i, a[i]);
@@ -45,5 +43,4 @@ public class OracleTest {
             }
         }
     }
-
 }

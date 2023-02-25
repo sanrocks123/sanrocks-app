@@ -1,7 +1,4 @@
-/**
- * Copyright (c) @Sanjeev Saxena 2017. All Rights Reserved.
- */
-
+/* (C) 2017 */
 package programming.shoppingcart;
 
 import org.junit.Assert;
@@ -14,7 +11,6 @@ import org.junit.Test;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class ShoppingCartTest {
 
     // addItem()
@@ -24,7 +20,8 @@ public class ShoppingCartTest {
 
     @Test
     public void testAddNewItemCount() {
-        final ShoppingOperation shopOperation = new ShoppingOperationsImpl(new ItemTestDataRepositoryImpl());
+        final ShoppingOperation shopOperation =
+                new ShoppingOperationsImpl(new ItemTestDataRepositoryImpl());
         shopOperation.addItem("01001");
         shopOperation.addItem("01002");
         shopOperation.addItem("01003");
@@ -35,7 +32,8 @@ public class ShoppingCartTest {
 
     @Test
     public void testAddNewItemSize() {
-        final ShoppingOperation shopOperation = new ShoppingOperationsImpl(new ItemTestDataRepositoryImpl());
+        final ShoppingOperation shopOperation =
+                new ShoppingOperationsImpl(new ItemTestDataRepositoryImpl());
         shopOperation.addItem("01001");
         shopOperation.addItem("01001");
         shopOperation.addItem("01001");
@@ -48,5 +46,4 @@ public class ShoppingCartTest {
 
         shopOperation.summary();
     }
-
 }

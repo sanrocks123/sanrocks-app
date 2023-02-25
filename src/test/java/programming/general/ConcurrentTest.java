@@ -1,16 +1,5 @@
-/**
- * Copyright (c) @Sanjeev Saxena 2017. All Rights Reserved.
- */
-
+/* (C) 2017 */
 package programming.general;
-
-import programming.domain.Counter;
-import programming.domain.Employee;
-import programming.domain.OddEvenCounter;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +9,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import programming.domain.Counter;
+import programming.domain.Employee;
+import programming.domain.OddEvenCounter;
 
 /**
  * Java Source ConcurrentTest.java created on Mar 20, 2019
@@ -28,7 +24,6 @@ import java.util.concurrent.locks.ReentrantLock;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public class ConcurrentTest {
 
     class ReadWriteLock {
@@ -48,7 +43,6 @@ public class ConcurrentTest {
                     e.printStackTrace();
                 }
             }
-
         }
 
         public synchronized void readLockRelease() {
@@ -69,7 +63,6 @@ public class ConcurrentTest {
                     e.printStackTrace();
                 }
             }
-
         }
 
         public synchronized void writeLockRelease() {
@@ -77,7 +70,6 @@ public class ConcurrentTest {
             writer--;
             notifyAll();
         }
-
     }
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -87,74 +79,83 @@ public class ConcurrentTest {
     public void testBlockingQueue() {
         final BlockingQueue<Employee> bQueue = new ArrayBlockingQueue<>(10);
 
-        final Runnable producer = () -> {
+        final Runnable producer =
+                () -> {
+                    final Employee e = new Employee(new Random().nextInt(), "a");
+                    try {
+                        bQueue.put(e);
+                    } catch (final InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                    log.info("{} produced {}", Thread.currentThread().getName(), e);
+                };
 
-            final Employee e = new Employee(new Random().nextInt(), "a");
-            try {
-                bQueue.put(e);
-            } catch (final InterruptedException e1) {
-                e1.printStackTrace();
-            }
-            log.info("{} produced {}", Thread.currentThread().getName(), e);
-        };
+        final Runnable consumer =
+                () -> {
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                        final Employee e = bQueue.take();
+                        log.info("{} consumed {}", Thread.currentThread().getName(), e);
+                    } catch (final InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                };
 
-        final Runnable consumer = () -> {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-                final Employee e = bQueue.take();
-                log.info("{} consumed {}", Thread.currentThread().getName(), e);
-            } catch (final InterruptedException e) {
-                e.printStackTrace();
-            }
-        };
-
-        final ExecutorService execSvc = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        final ExecutorService execSvc =
+                Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
         for (int i = 0; i < 10; i++) {
             execSvc.execute(new Thread(producer));
             execSvc.execute(new Thread(consumer));
         }
         execSvc.shutdown();
-        while (!execSvc.isTerminated()) {
-        }
-
+        while (!execSvc.isTerminated()) {}
     }
 
     @Test
     public void testJoin() throws InterruptedException {
 
-        final Thread t1 = new Thread(() -> {
-            try {
-                log.info("{} started", Thread.currentThread().getName());
-                TimeUnit.SECONDS.sleep(2);
-                log.info("{} done", Thread.currentThread().getName());
+        final Thread t1 =
+                new Thread(
+                        () -> {
+                            try {
+                                log.info("{} started", Thread.currentThread().getName());
+                                TimeUnit.SECONDS.sleep(2);
+                                log.info("{} done", Thread.currentThread().getName());
 
-            } catch (final InterruptedException e) {
-                e.printStackTrace();
-            }
-        }, "t1");
+                            } catch (final InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        },
+                        "t1");
 
-        final Thread t2 = new Thread(() -> {
-            try {
-                log.info("{} started", Thread.currentThread().getName());
-                TimeUnit.SECONDS.sleep(2);
-                log.info("{} done", Thread.currentThread().getName());
+        final Thread t2 =
+                new Thread(
+                        () -> {
+                            try {
+                                log.info("{} started", Thread.currentThread().getName());
+                                TimeUnit.SECONDS.sleep(2);
+                                log.info("{} done", Thread.currentThread().getName());
 
-            } catch (final InterruptedException e) {
-                e.printStackTrace();
-            }
-        }, "t2");
+                            } catch (final InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        },
+                        "t2");
 
-        final Thread t3 = new Thread(() -> {
-            try {
-                log.info("{} started", Thread.currentThread().getName());
-                TimeUnit.SECONDS.sleep(3);
-                log.info("{} done", Thread.currentThread().getName());
+        final Thread t3 =
+                new Thread(
+                        () -> {
+                            try {
+                                log.info("{} started", Thread.currentThread().getName());
+                                TimeUnit.SECONDS.sleep(3);
+                                log.info("{} done", Thread.currentThread().getName());
 
-            } catch (final InterruptedException e) {
-                e.printStackTrace();
-            }
-        }, "t3");
+                            } catch (final InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        },
+                        "t3");
 
         t3.start();
         t2.start();
@@ -174,24 +175,31 @@ public class ConcurrentTest {
         final Lock lock = new ReentrantLock();
         final Counter count = new Counter();
 
-        final Runnable task = () -> {
-            try {
-                log.info("Thread {}, Trying for lock", Thread.currentThread().getName());
-                if (lock.tryLock(5, TimeUnit.SECONDS)) {
+        final Runnable task =
+                () -> {
                     try {
-                        final int tt = count.getCount() + 1;
-                        count.setCount(tt);
-                        log.info("Thread {}, Acquired, count {}", Thread.currentThread().getName(), count.getCount());
-                    } finally {
-                        lock.unlock();
+                        log.info("Thread {}, Trying for lock", Thread.currentThread().getName());
+                        if (lock.tryLock(5, TimeUnit.SECONDS)) {
+                            try {
+                                final int tt = count.getCount() + 1;
+                                count.setCount(tt);
+                                log.info(
+                                        "Thread {}, Acquired, count {}",
+                                        Thread.currentThread().getName(),
+                                        count.getCount());
+                            } finally {
+                                lock.unlock();
+                            }
+                        } else {
+                            log.info(
+                                    "Thread {}, Not Acquired, count {}",
+                                    Thread.currentThread().getName(),
+                                    count.getCount());
+                        }
+                    } catch (final InterruptedException e) {
+                        log.error("Error ", e);
                     }
-                } else {
-                    log.info("Thread {}, Not Acquired, count {}", Thread.currentThread().getName(), count.getCount());
-                }
-            } catch (final InterruptedException e) {
-                log.error("Error ", e);
-            }
-        };
+                };
 
         final ExecutorService eSvc = Executors.newWorkStealingPool();
         for (int i = 0; i < 10; i++) {
@@ -199,8 +207,7 @@ public class ConcurrentTest {
         }
 
         eSvc.shutdown();
-        while (!eSvc.isTerminated()) {
-        }
+        while (!eSvc.isTerminated()) {}
     }
 
     @Test
@@ -208,48 +215,55 @@ public class ConcurrentTest {
 
         final List<Integer> counter = new ArrayList<>();
 
-        new Thread(() -> {
+        new Thread(
+                        () -> {
+                            while (counter.size() != 10) {
 
-            while (counter.size() != 10) {
+                                synchronized (counter) {
+                                    if (counter.size() % 2 == 0) {
+                                        counter.add(0);
+                                        System.out.println(
+                                                Thread.currentThread().getName()
+                                                        + ": "
+                                                        + counter.size());
+                                        counter.notify();
+                                    } else {
+                                        try {
+                                            counter.wait();
+                                        } catch (final InterruptedException e) {
+                                            log.error("even thread interrupted");
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "even")
+                .start();
 
-                synchronized (counter) {
+        new Thread(
+                        () -> {
+                            while (counter.size() != 10) {
 
-                    if (counter.size() % 2 == 0) {
-                        counter.add(0);
-                        System.out.println(Thread.currentThread().getName() + ": " + counter.size());
-                        counter.notify();
-                    } else {
-                        try {
-                            counter.wait();
-                        } catch (final InterruptedException e) {
-                            log.error("even thread interrupted");
-                        }
-                    }
-                }
-            }
-
-        }, "even").start();
-
-        new Thread(() -> {
-
-            while (counter.size() != 10) {
-
-                synchronized (counter) {
-                    if (counter.size() % 2 != 0) {
-                        counter.add(0);
-                        System.out.println(Thread.currentThread().getName() + ": " + counter.size());
-                        counter.notify();
-                    } else {
-                        try {
-                            counter.wait();
-                        } catch (final InterruptedException e) {
-                            log.error("odd thread interrupted");
-                        }
-                    }
-                }
-            }
-
-        }, "odd").start();
+                                synchronized (counter) {
+                                    if (counter.size() % 2 != 0) {
+                                        counter.add(0);
+                                        System.out.println(
+                                                Thread.currentThread().getName()
+                                                        + ": "
+                                                        + counter.size());
+                                        counter.notify();
+                                    } else {
+                                        try {
+                                            counter.wait();
+                                        } catch (final InterruptedException e) {
+                                            log.error("odd thread interrupted");
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "odd")
+                .start();
 
         TimeUnit.SECONDS.sleep(2);
     }
@@ -260,29 +274,38 @@ public class ConcurrentTest {
         final BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(5);
         final AtomicInteger count = new AtomicInteger(5);
 
-        final Runnable producer = () -> {
-            while (count.get() != 0) {
-                try {
-                    final int number = new Random().nextInt();
-                    queue.put(number);
-                    count.decrementAndGet();
-                    log.info("Thread {} Produced {}", Thread.currentThread().getName(), number);
-                } catch (final InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
+        final Runnable producer =
+                () -> {
+                    while (count.get() != 0) {
+                        try {
+                            final int number = new Random().nextInt();
+                            queue.put(number);
+                            count.decrementAndGet();
+                            log.info(
+                                    "Thread {} Produced {}",
+                                    Thread.currentThread().getName(),
+                                    number);
+                        } catch (final InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
 
-        final Runnable consumer = () -> {
-            while (!queue.isEmpty()) {
-                try {
-                    final int number = queue.take();
-                    System.out.println("Thread " + Thread.currentThread().getName() + " Consumed " + number);
-                } catch (final InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
+        final Runnable consumer =
+                () -> {
+                    while (!queue.isEmpty()) {
+                        try {
+                            final int number = queue.take();
+                            System.out.println(
+                                    "Thread "
+                                            + Thread.currentThread().getName()
+                                            + " Consumed "
+                                            + number);
+                        } catch (final InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
 
         new Thread(producer).start();
         new Thread(consumer).start();
@@ -297,69 +320,81 @@ public class ConcurrentTest {
         final Condition condition = lock.newCondition();
         count.setEnable(false);
 
-        final Runnable r1 = () -> {
-
-            while (count.isEnable()) {
-                try {
-                    log.info("{}, trying lock", Thread.currentThread().getName());
-                    if (lock.tryLock(5, TimeUnit.SECONDS)) {
+        final Runnable r1 =
+                () -> {
+                    while (count.isEnable()) {
                         try {
-                            log.info("{}, lock acquired", Thread.currentThread().getName());
-                            if (count.getCount() == 0) {
-                                log.info("{}, incrementing count", Thread.currentThread().getName());
-                                final int tt = count.getCount() + 1;
-                                count.setCount(tt);
+                            log.info("{}, trying lock", Thread.currentThread().getName());
+                            if (lock.tryLock(5, TimeUnit.SECONDS)) {
+                                try {
+                                    log.info("{}, lock acquired", Thread.currentThread().getName());
+                                    if (count.getCount() == 0) {
+                                        log.info(
+                                                "{}, incrementing count",
+                                                Thread.currentThread().getName());
+                                        final int tt = count.getCount() + 1;
+                                        count.setCount(tt);
 
-                                TimeUnit.SECONDS.sleep(3);
-                                condition.signal();
+                                        TimeUnit.SECONDS.sleep(3);
+                                        condition.signal();
+                                    } else {
+                                        log.info(
+                                                "{}, count not ZERO, waiting",
+                                                Thread.currentThread().getName());
+                                        condition.await(5, TimeUnit.SECONDS);
+                                    }
+                                } finally {
+                                    lock.unlock();
+                                    log.info("{}, lock released", Thread.currentThread().getName());
+                                }
                             } else {
-                                log.info("{}, count not ZERO, waiting", Thread.currentThread().getName());
-                                condition.await(5, TimeUnit.SECONDS);
+                                log.info(
+                                        "{}, lock acquire failed",
+                                        Thread.currentThread().getName());
                             }
-                        } finally {
-                            lock.unlock();
-                            log.info("{}, lock released", Thread.currentThread().getName());
+                        } catch (final InterruptedException e) {
+                            log.error("Error", e);
                         }
-                    } else {
-                        log.info("{}, lock acquire failed", Thread.currentThread().getName());
                     }
-                } catch (final InterruptedException e) {
-                    log.error("Error", e);
-                }
-            }
-        };
+                };
 
-        final Runnable r2 = () -> {
-
-            while (count.isEnable()) {
-                try {
-                    log.info("{}, trying lock", Thread.currentThread().getName());
-                    if (lock.tryLock(5, TimeUnit.SECONDS)) {
+        final Runnable r2 =
+                () -> {
+                    while (count.isEnable()) {
                         try {
-                            log.info("{}, lock acquired", Thread.currentThread().getName());
-                            if (count.getCount() == 1) {
-                                log.info("{}, decrememting count", Thread.currentThread().getName());
-                                final int tt = count.getCount() - 1;
-                                count.setCount(tt);
+                            log.info("{}, trying lock", Thread.currentThread().getName());
+                            if (lock.tryLock(5, TimeUnit.SECONDS)) {
+                                try {
+                                    log.info("{}, lock acquired", Thread.currentThread().getName());
+                                    if (count.getCount() == 1) {
+                                        log.info(
+                                                "{}, decrememting count",
+                                                Thread.currentThread().getName());
+                                        final int tt = count.getCount() - 1;
+                                        count.setCount(tt);
 
-                                TimeUnit.SECONDS.sleep(3);
-                                condition.signal();
+                                        TimeUnit.SECONDS.sleep(3);
+                                        condition.signal();
+                                    } else {
+                                        log.info(
+                                                "{}, count ZERO, waiting",
+                                                Thread.currentThread().getName());
+                                        condition.await(5, TimeUnit.SECONDS);
+                                    }
+                                } finally {
+                                    lock.unlock();
+                                    log.info("{}, lock released", Thread.currentThread().getName());
+                                }
                             } else {
-                                log.info("{}, count ZERO, waiting", Thread.currentThread().getName());
-                                condition.await(5, TimeUnit.SECONDS);
+                                log.info(
+                                        "{}, lock acquire failed",
+                                        Thread.currentThread().getName());
                             }
-                        } finally {
-                            lock.unlock();
-                            log.info("{}, lock released", Thread.currentThread().getName());
+                        } catch (final InterruptedException e) {
+                            log.error("Error", e);
                         }
-                    } else {
-                        log.info("{}, lock acquire failed", Thread.currentThread().getName());
                     }
-                } catch (final InterruptedException e) {
-                    log.error("Error", e);
-                }
-            }
-        };
+                };
 
         final ExecutorService eSvc = Executors.newWorkStealingPool();
 
@@ -367,8 +402,7 @@ public class ConcurrentTest {
         eSvc.execute(new Thread(r2));
 
         eSvc.shutdown();
-        while (!eSvc.isTerminated()) {
-        }
+        while (!eSvc.isTerminated()) {}
     }
 
     @Test
@@ -379,51 +413,57 @@ public class ConcurrentTest {
         final ExecutorService execSvc = Executors.newFixedThreadPool(3);
 
         for (int i = 0; i < 1; i++) {
-            execSvc.execute(() -> {
-                rwLock.readLock();
-                try {
-                    Thread.sleep(2000);
-                } catch (final InterruptedException e) {
-                    e.printStackTrace();
-                }
+            execSvc.execute(
+                    () -> {
+                        rwLock.readLock();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (final InterruptedException e) {
+                            e.printStackTrace();
+                        }
 
-                rwLock.readLockRelease();
-            });
+                        rwLock.readLockRelease();
+                    });
         }
 
         for (int i = 0; i < 1; i++) {
-            execSvc.execute(() -> {
-                rwLock.writeLock();
-                try {
-                    Thread.sleep(2000);
-                } catch (final InterruptedException e) {
-                    e.printStackTrace();
-                }
-                rwLock.writeLockRelease();
-            });
+            execSvc.execute(
+                    () -> {
+                        rwLock.writeLock();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (final InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        rwLock.writeLockRelease();
+                    });
         }
 
         execSvc.shutdown();
-        while (!execSvc.isTerminated()) {
-        }
-
+        while (!execSvc.isTerminated()) {}
     }
 
     @Test
     public void testSimpleEvenOddProducerConsumer() throws InterruptedException {
         final OddEvenCounter number = new OddEvenCounter(1, 10);
 
-        final Thread even = new Thread(() -> {
-            while (!number.isMaxCapacityReached()) {
-                log.info("even : {}", number.printEven());
-            }
-        }, "even");
+        final Thread even =
+                new Thread(
+                        () -> {
+                            while (!number.isMaxCapacityReached()) {
+                                log.info("even : {}", number.printEven());
+                            }
+                        },
+                        "even");
 
-        final Thread odd = new Thread(() -> {
-            while (!number.isMaxCapacityReached()) {
-                log.info("odd : {}", number.printOdd());
-            }
-        }, "odd");
+        final Thread odd =
+                new Thread(
+                        () -> {
+                            while (!number.isMaxCapacityReached()) {
+                                log.info("odd : {}", number.printOdd());
+                            }
+                        },
+                        "odd");
 
         even.start();
         odd.start();
@@ -436,17 +476,18 @@ public class ConcurrentTest {
     public void testThreadCounter() {
 
         final OddEvenCounter sharedCounter = new OddEvenCounter(0, 10);
-        final Runnable task = () -> {
-            synchronized (sharedCounter) {
-                sharedCounter.setCount(sharedCounter.getCount() + 1);
+        final Runnable task =
+                () -> {
+                    synchronized (sharedCounter) {
+                        sharedCounter.setCount(sharedCounter.getCount() + 1);
 
-                if (0 == sharedCounter.getCount() % 2) {
-                    log.info("{} Even", sharedCounter.getCount());
-                } else {
-                    log.info("{} Odd", sharedCounter.getCount());
-                }
-            }
-        };
+                        if (0 == sharedCounter.getCount() % 2) {
+                            log.info("{} Even", sharedCounter.getCount());
+                        } else {
+                            log.info("{} Odd", sharedCounter.getCount());
+                        }
+                    }
+                };
 
         final ExecutorService execSvc = Executors.newFixedThreadPool(3);
         for (int i = 0; i < 10; i++) {
@@ -454,8 +495,6 @@ public class ConcurrentTest {
         }
 
         execSvc.shutdown();
-        while (!execSvc.isTerminated()) {
-        }
+        while (!execSvc.isTerminated()) {}
     }
-
 }

@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package programming.problemsolving;
 
 import java.util.concurrent.*;
@@ -28,7 +29,5 @@ public class NatwestTest {
         // execSvc.shutdown();
         System.out.println(childResponse.get());
         System.out.println("main thread working");
-
     }
-
 }

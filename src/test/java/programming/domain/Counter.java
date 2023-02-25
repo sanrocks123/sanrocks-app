@@ -1,10 +1,10 @@
+/* (C) 2023 */
 package programming.domain;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.Serializable;
+import org.json.JSONObject;
 
 public class Counter implements Serializable {
 
@@ -20,8 +20,7 @@ public class Counter implements Serializable {
     public Counter copy() {
         try {
             return new ObjectMapper().readValue(new JSONObject(this).toString(), Counter.class);
-        }
-        catch (final IOException e) {
+        } catch (final IOException e) {
             throw new RuntimeException("Object Clone Failure", e);
         }
     }
@@ -50,8 +49,7 @@ public class Counter implements Serializable {
             if (other.emp != null) {
                 return false;
             }
-        }
-        else if (!emp.equals(other.emp)) {
+        } else if (!emp.equals(other.emp)) {
             return false;
         }
         if (isEnable != other.isEnable) {
@@ -121,40 +119,35 @@ public class Counter implements Serializable {
     }
 
     /**
-     * @param count
-     *            the count to set
+     * @param count the count to set
      */
     public void setCount(int count) {
         this.count = count;
     }
 
     /**
-     * @param emp
-     *            the emp to set
+     * @param emp the emp to set
      */
     public void setEmp(Employee emp) {
         this.emp = emp;
     }
 
     /**
-     * @param isEnable
-     *            the isEnable to set
+     * @param isEnable the isEnable to set
      */
     public void setEnable(boolean isEnable) {
         this.isEnable = isEnable;
     }
 
     /**
-     * @param x
-     *            the x to set
+     * @param x the x to set
      */
     public void setX(int x) {
         this.x = x;
     }
 
     /**
-     * @param y
-     *            the y to set
+     * @param y the y to set
      */
     public void setY(int y) {
         this.y = y;

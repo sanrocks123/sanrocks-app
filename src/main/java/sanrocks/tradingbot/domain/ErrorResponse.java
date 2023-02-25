@@ -1,9 +1,9 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.json.JSONObject;
-
 import java.io.Serializable;
+import org.json.JSONObject;
 
 /**
  * Java Source ErrorResponse created on 12/25/2021
@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ErrorResponse implements Serializable {
 
@@ -21,8 +20,7 @@ public class ErrorResponse implements Serializable {
     private String message;
     private String errorCode;
 
-    public ErrorResponse() {
-    }
+    public ErrorResponse() {}
 
     public ErrorResponse(final String message, final String errorCode) {
         this.message = message;

@@ -1,7 +1,3 @@
-#
-# Description	: bux trading bot development service properties
-# Author		: Sanjeev
-# environment   : dev
-
+---
 bux:
-  rtf-server: wss://rtf.beta.getbux.com
+  rtf-server: "wss://rtf.beta.getbux.com"

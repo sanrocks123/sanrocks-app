@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package programming.general;
 
 import org.junit.Assert;
@@ -10,7 +11,6 @@ import org.junit.Test;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class ExampleTest {
 
     @Test
@@ -42,5 +42,4 @@ public class ExampleTest {
     public void testSample() {
         System.out.println(Math.max(1, 2));
     }
-
 }

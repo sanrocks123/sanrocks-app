@@ -1,20 +1,18 @@
+/* (C) 2023 */
 package programming.algos;
-
-import org.junit.Test;
 
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
+import org.junit.Test;
 
 /**
- *
  * Java Source QueueTest.java created on Aug 12, 2021
  *
  * @author : Sanjeev Saxena
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class QueueTest {
 
     @Test
@@ -23,7 +21,6 @@ public class QueueTest {
         final Deque<Integer> dq = new LinkedList<>();
 
         System.out.println(dq);
-
     }
 
     @Test
@@ -37,7 +34,5 @@ public class QueueTest {
         queue.add(4);
 
         System.out.println(queue);
-
     }
-
 }

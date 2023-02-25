@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.rules;
 
 import java.math.BigDecimal;
@@ -29,7 +30,6 @@ public class RuleEngineTest {
         EasyRandom random = new EasyRandom();
         Company company = random.nextObject(Company.class);
         log.info("company object: {}", company);
-
     }
 
     @Test

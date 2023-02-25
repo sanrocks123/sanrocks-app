@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.exception;
 
 import java.util.Map;

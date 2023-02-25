@@ -1,15 +1,11 @@
-/**
- * Copyright (c) 2019 @SanRockzz Ltd. All Rights Reserved.
- */
-
+/* (C) 2019 */
 package programming.general;
 
+import java.util.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.*;
 
 /**
  * Java Source CollectionTest.java created on Dec 21, 2019
@@ -18,7 +14,6 @@ import java.util.*;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public class CollectionTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -57,8 +52,11 @@ public class CollectionTest {
         map.put("c", 2);
         map.put("d", 1);
 
-        final int max = map.entrySet().stream().max((e1, e2) -> e1.getValue() > e2.getValue() ? 1 : -1).get()
-                .getValue();
+        final int max =
+                map.entrySet().stream()
+                        .max((e1, e2) -> e1.getValue() > e2.getValue() ? 1 : -1)
+                        .get()
+                        .getValue();
         System.out.printf("max value: %d", max);
     }
 
@@ -73,5 +71,4 @@ public class CollectionTest {
 
         log.info("list: {}", list);
     }
-
 }

@@ -1,13 +1,13 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Java Source TradeBotUtils created on 12/23/2021
@@ -16,7 +16,6 @@ import java.io.InputStream;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 @Slf4j
 public class TradeBotUtils {
 
@@ -35,7 +34,8 @@ public class TradeBotUtils {
             return new ObjectMapper().readValue(json, classz);
         } catch (JsonProcessingException e) {
             log.error("event processing error : ", e);
-            throw new IllegalArgumentException(String.format("json deserialization error - %s", e.getMessage()));
+            throw new IllegalArgumentException(
+                    String.format("json deserialization error - %s", e.getMessage()));
         }
     }
 

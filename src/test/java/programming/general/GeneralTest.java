@@ -1,16 +1,12 @@
-/**
- * Copyright (c) @Sanjeev Saxena 2017. All Rights Reserved.
- */
-
+/* (C) 2017 */
 package programming.general;
 
+import java.util.concurrent.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import programming.domain.*;
-
-import java.util.concurrent.*;
 
 /**
  * Java Source GeneralTest.java created on Apr 17, 2019
@@ -19,7 +15,6 @@ import java.util.concurrent.*;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public class GeneralTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -86,7 +81,6 @@ public class GeneralTest {
 
         final int n = 3;
         System.out.printf("fact: %d ", factorial(n));
-
     }
 
     @Test
@@ -103,11 +97,9 @@ public class GeneralTest {
         saw = hammer_saw - hammer;
         house = house_saw - saw;
 
-        //while(hammer + )
-
+        // while(hammer + )
 
     }
-
 
     @Test
     public void testImmutable() {
@@ -166,7 +158,6 @@ public class GeneralTest {
         qq.put("b");
 
         log.info("qq {}", qq);
-
     }
 
     @Test
@@ -183,17 +174,19 @@ public class GeneralTest {
 
         log.info("cc init {}", cc);
 
-        final Runnable r1 = () -> {
-            cc.m1();
-            cc.getEmp().setName("b");
-            log.info("r1 cc {}", cc);
-        };
+        final Runnable r1 =
+                () -> {
+                    cc.m1();
+                    cc.getEmp().setName("b");
+                    log.info("r1 cc {}", cc);
+                };
 
-        final Runnable r2 = () -> {
-            // cc.m2();
-            // cc.getEmp().setName("c");
-            log.info("r2 cc {}", cc);
-        };
+        final Runnable r2 =
+                () -> {
+                    // cc.m2();
+                    // cc.getEmp().setName("c");
+                    log.info("r2 cc {}", cc);
+                };
 
         final ExecutorService eSvc = Executors.newFixedThreadPool(2);
 
@@ -203,9 +196,7 @@ public class GeneralTest {
         }
 
         eSvc.shutdown();
-        while (!eSvc.isTerminated()) {
-        }
-
+        while (!eSvc.isTerminated()) {}
     }
 
     /**
@@ -233,6 +224,4 @@ public class GeneralTest {
             return 1;
         }
     }
-
-
 }

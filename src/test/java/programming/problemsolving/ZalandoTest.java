@@ -1,8 +1,8 @@
+/* (C) 2023 */
 package programming.problemsolving;
 
-import org.junit.Test;
-
 import java.util.*;
+import org.junit.Test;
 
 /**
  * Java Source ZalandoTest.java created on Oct 9, 2021
@@ -11,7 +11,6 @@ import java.util.*;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class ZalandoTest {
 
     @Test
@@ -35,34 +34,36 @@ public class ZalandoTest {
             if (currentNumber > maxSoFar) {
                 maxSoFar = currentNumber;
             }
-
         }
 
         System.out.println("max: " + maxSoFar);
-
     }
 
     @Test
     public void test2() {
 
         final String s = "abccbd";
-        final int[] c = { 0, 1, 2, 3, 4, 5 };
+        final int[] c = {0, 1, 2, 3, 4, 5};
 
         final Map<Character, PriorityQueue<Integer>> countMap = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
             final char cc = s.charAt(i);
             final int j = i;
 
-            countMap.computeIfPresent(cc, (k, v) -> {
-                v.add(c[j]);
-                return v;
-            });
+            countMap.computeIfPresent(
+                    cc,
+                    (k, v) -> {
+                        v.add(c[j]);
+                        return v;
+                    });
 
-            countMap.computeIfAbsent(cc, v -> {
-                final PriorityQueue<Integer> list = new PriorityQueue<>();
-                list.add(c[j]);
-                return list;
-            });
+            countMap.computeIfAbsent(
+                    cc,
+                    v -> {
+                        final PriorityQueue<Integer> list = new PriorityQueue<>();
+                        list.add(c[j]);
+                        return list;
+                    });
         }
 
         System.out.println("countMap: " + countMap);
@@ -85,13 +86,12 @@ public class ZalandoTest {
 
         final int minCostSum = minCostList.stream().mapToInt(v -> v.intValue()).sum();
         System.out.println("minCost: " + minCostSum);
-
     }
 
     @Test
     public void test3() {
 
-        final int[] a = { 5, 2, 4, 6, 3, 7 };
+        final int[] a = {5, 2, 4, 6, 3, 7};
 
         int minSoFar = Integer.MAX_VALUE;
 
@@ -106,10 +106,8 @@ public class ZalandoTest {
                     minSoFar = currentSum;
                     System.out.println(String.format("i:%d, j:%d, minSoFar: %d", i, j, minSoFar));
                 }
-
             }
         }
         System.out.println(minSoFar);
     }
-
 }

@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package programming.algos;
 
 import org.junit.Test;
@@ -9,12 +10,8 @@ import org.junit.Test;
  * @email : sanrocks123@gmail.com
  * @version : 1.0
  */
-
 public class StackTest {
 
     @Test
-    public void testFirstNonRepeatingChar() {
-
-    }
-
+    public void testFirstNonRepeatingChar() {}
 }

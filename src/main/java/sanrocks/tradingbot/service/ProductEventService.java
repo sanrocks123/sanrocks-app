@@ -1,8 +1,8 @@
+/* (C) 2023 */
 package sanrocks.tradingbot.service;
 
-import sanrocks.tradingbot.domain.ProductQuoteEvent;
-
 import java.util.List;
+import sanrocks.tradingbot.domain.ProductQuoteEvent;
 
 /**
  * Java Source ProductEventService created on 12/24/2021
@@ -11,7 +11,6 @@ import java.util.List;
  * @version : 1.0
  * @email : sanrocks123@gmail.com
  */
-
 public interface ProductEventService {
 
     /**
