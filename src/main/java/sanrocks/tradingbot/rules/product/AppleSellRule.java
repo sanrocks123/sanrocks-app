@@ -16,7 +16,7 @@ import sanrocks.tradingbot.domain.Trade;
 @Rule(
         name = "when_targetSellPriceMatched_then_applyTrades",
         description = "apple product sell condition",
-        priority = 0)
+        priority = 1)
 public class AppleSellRule extends ProductBaseRules {
 
     @Condition

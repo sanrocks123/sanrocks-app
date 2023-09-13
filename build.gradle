@@ -11,8 +11,9 @@ buildscript {
 
 plugins {
 	id "org.springdoc.openapi-gradle-plugin" version "1.3.4"
-	id "com.apollographql.apollo3" version "3.7.4"
+	//id "com.apollographql.apollo3" version "3.7.4"
 	id "com.diffplug.spotless" version "6.15.0"
+	id "com.graphql_java_generator.graphql-gradle-plugin" version "${graphQLPluginVersion}"
 }
 
 apply plugin: 'application'
@@ -34,9 +35,8 @@ configurations {
 
 dependencies {
 
-	implementation("com.apollographql.apollo3:apollo-runtime:3.7.4")
-	implementation group: 'com.apollographql.apollo3', name: 'apollo-api-jvm', version: '3.7.4'
-	runtimeOnly group: 'com.apollographql.apollo3', name: 'apollo-api', version: '3.7.4'
+	//implementation("com.apollographql.apollo3:apollo-runtime:3.7.4")
+	//implementation "com.graphql-java-generator:graphql-java-client-runtime:${graphQLPluginVersion}"
 
 	implementation "org.springframework.boot:spring-boot-starter-web:$springboot"
 	implementation 'org.springframework:spring-websocket:5.3.20'
@@ -94,12 +94,13 @@ openApi {
 	apiDocsUrl.set("http://localhost:1000/trading-bot/v3/api-docs")
 }
 
-
-apollo {
-	service("trading-bot") {
-		setPackageName("com.sanrocks.graphql")
-	}
-}
+/**
+ apollo {
+ service("trading-bot") {
+ setPackageName("com.sanrocks.graphql")
+ }
+ }
+ */
 
 spotless {
 	java {
@@ -109,24 +110,38 @@ spotless {
 		formatAnnotations()
 	}
 
-	groovyGradle {
-		target '*.gradle' // default target of groovyGradle
-		greclipse()
-	}
-
 	json {
 		target 'src/**/*.json'
 		gson()
-				.indentWithSpaces(6) // optional: specify the number of spaces to use
+				.indentWithSpaces(2) // optional: specify the number of spaces to use
 				.sortByKeys()        // optional: sort JSON by its keys
 				.escapeHtml()        // optional: escape HTML in values
 				.version('2.8.1')    // optional: specify version
 	}
+}
 
-	yaml {
-		target 'src/**/*.yaml'
-		jackson()
-	}
+/*
+ generateClientCode {
+ dependsOn generateGraphQLSchema
+ packageName "com.tradingbot.graphql.generated"
+ schemaFileFolder "build/generated/resources/schema"
+ schemaFilePattern "*.graphqls"
+ }
+ **/
+
+generateGraphQLSchema {
+	dependsOn clean
+	schemaFileFolder "src/main/resources/graphql"
+	schemaFilePattern "*.graphqls"
+	targetFolder "build/generated/resources/schema"
+	targetSchemaFileName "trading-bot-schema.graphqls"
+}
+
+generatePojo {
+	dependsOn generateGraphQLSchema
+	packageName "com.tradingbot.graphql.generated"
+	schemaFileFolder "build/generated/resources/schema"
+	schemaFilePattern "*.graphqls"
 }
 
 compileJava.dependsOn spotlessApply
