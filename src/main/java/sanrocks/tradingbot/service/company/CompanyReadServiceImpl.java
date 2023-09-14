@@ -1,5 +1,5 @@
 /* (C) 2023 */
-package sanrocks.tradingbot.service;
+package sanrocks.tradingbot.service.company;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import java.util.HashMap;

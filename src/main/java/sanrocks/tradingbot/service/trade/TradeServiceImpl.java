@@ -1,5 +1,5 @@
 /* (C) 2023 */
-package sanrocks.tradingbot.service;
+package sanrocks.tradingbot.service.trade;
 
 import java.util.Arrays;
 import java.util.Locale;

@@ -1,5 +1,5 @@
 /* (C) 2023 */
-package sanrocks.tradingbot.util;
+package sanrocks.tradingbot.service.company.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import lombok.extern.slf4j.Slf4j;

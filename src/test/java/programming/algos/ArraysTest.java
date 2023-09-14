@@ -20,6 +20,29 @@ import org.junit.jupiter.api.Test;
 public class ArraysTest {
 
     @Test
+    public void testSubarrayWithGivenSum() {
+
+        List<Integer> arr = List.of(1, 2, 3, 4, 5);
+        int targetSum = 12;
+
+        List<Integer> expected = List.of(2, 4);
+        int currentSum = 0;
+        int start = 0;
+
+        for (int i = 1; i < arr.size(); i++) {
+
+            // calculate  current sum
+            currentSum += arr.get(i); //
+
+            if (currentSum > targetSum) {
+                currentSum -= arr.get(start);
+                start++;
+                continue;
+            }
+        }
+    }
+
+    @Test
     public void testArrayAlternateSorting() {
         final Integer[] arr = {1, 2, 3, -4, -1, 4};
 

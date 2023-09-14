@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sanrocks.tradingbot.domain.ProductQuoteEvent;
-import sanrocks.tradingbot.service.ProductEventService;
+import sanrocks.tradingbot.service.product.ProductEventService;
 
 /**
  * Java Source EventController created on 12/25/2021

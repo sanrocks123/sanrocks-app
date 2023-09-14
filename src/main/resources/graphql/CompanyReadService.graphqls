@@ -1,6 +1,3 @@
-type QueryAPIs {
-    companyById(id: ID): Company
-}
 
 # the company object
 type Company {

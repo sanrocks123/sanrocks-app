@@ -1,5 +1,5 @@
 /* (C) 2023 */
-package sanrocks.tradingbot.service;
+package sanrocks.tradingbot.service.product;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;

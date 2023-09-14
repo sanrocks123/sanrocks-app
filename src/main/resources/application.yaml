@@ -35,3 +35,7 @@ logging:
     reactor:
       netty: "INFO"
     graphql: "INFO"
+
+#graphql:
+  #tools:
+    #schemaLocationPattern: "src/main/resources/*.graphqls"

@@ -15,11 +15,14 @@ import sanrocks.tradingbot.domain.Product;
 @Rule(
         name = "when_appleProductMatched_then_applySellPricingLimits",
         description = "calculate apple pricing",
-        priority = 1)
+        priority = 0)
 public class AppleProductRule extends ProductBaseRules {
 
     @Condition
-    public boolean isAppleProduct(@Fact("product") Product product) {
+    public boolean isAppleProduct(
+            @Fact("product") Product product, @Fact("buyPrice") BigDecimal buyPrice) {
+
+        product.setBuyPrice(buyPrice);
         return product.getProductName().equalsIgnoreCase("apple");
     }
 
@@ -30,7 +33,5 @@ public class AppleProductRule extends ProductBaseRules {
         product.setBuyPrice(buyPrice);
 
         log.info("when_applyProductMatched_then_applySellPricingLimits {}", product.toString(4));
-
-        // throw new RuntimeException("Rule apply failure");
     }
 }

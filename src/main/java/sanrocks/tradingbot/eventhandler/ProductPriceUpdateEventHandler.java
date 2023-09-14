@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sanrocks.tradingbot.domain.Product;
 import sanrocks.tradingbot.domain.Trade;
-import sanrocks.tradingbot.service.TradeService;
+import sanrocks.tradingbot.service.trade.TradeService;
 
 /**
  * Java Source ProductPriceUpdateEventHandler created on 12/23/2021

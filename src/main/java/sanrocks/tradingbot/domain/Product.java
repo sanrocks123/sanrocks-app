@@ -80,7 +80,7 @@ public class Product implements Serializable {
         if (null == getCurrentPrice()) {
             return false;
         }
-        return getCurrentPrice().equals(getBuyPrice());
+        return (getCurrentPrice().compareTo(getBuyPrice())) == 0;
     }
 
     /**

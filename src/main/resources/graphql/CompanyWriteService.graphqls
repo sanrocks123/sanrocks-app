@@ -1,6 +1,4 @@
-type MutationAPIs {
-    saveCompany(company: CompanyInput): Company
-}
+
 
 # the company object
 input CompanyInput {

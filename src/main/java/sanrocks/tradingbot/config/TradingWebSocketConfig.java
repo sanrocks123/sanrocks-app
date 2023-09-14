@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import sanrocks.tradingbot.eventhandler.ProductWebSocketEventHandler;
-import sanrocks.tradingbot.service.ProductEventService;
+import sanrocks.tradingbot.service.product.ProductEventService;
 import sanrocks.tradingbot.util.DefaultProductLoader;
 import sanrocks.tradingbot.util.TradeBotUtils;
 

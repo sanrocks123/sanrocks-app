@@ -1,0 +1,8 @@
+
+type Query {
+    companyById(id: ID): Company
+}
+
+type Mutation {
+    saveCompany(company: CompanyInput): Company
+}

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sanrocks.tradingbot.config.TradingWebSocketConfig;
 import sanrocks.tradingbot.domain.ProductQuoteEvent;
-import sanrocks.tradingbot.service.ProductEventService;
+import sanrocks.tradingbot.service.product.ProductEventService;
 import sanrocks.tradingbot.util.DefaultProductLoader;
 import sanrocks.tradingbot.util.TradeBotUtils;
 
