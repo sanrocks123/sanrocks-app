@@ -6,4 +6,6 @@ import sanrocks.tradingbot.domain.Company;
 public interface CompanyReadService {
 
     Company getCompanyById(final String id);
+
+    Company getCompany(Company company);
 }

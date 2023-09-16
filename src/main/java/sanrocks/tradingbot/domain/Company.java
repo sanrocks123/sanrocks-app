@@ -5,17 +5,20 @@ import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import sanrocks.tradingbot.domain.graph.GraphBaseAttributes;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Document(collection = "companies")
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Company {
+@AllArgsConstructor
+public class Company extends GraphBaseAttributes {
 
     @Id private String id;
     private String name;

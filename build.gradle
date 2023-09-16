@@ -19,7 +19,7 @@ plugins {
 apply plugin: 'application'
 apply plugin: 'groovy'
 
-mainClassName = 'sanrocks.tradingbot.main.TradingBotServiceSelfHostApp'
+mainClassName = 'sanrocks.tradingbot.TradingBotServiceSelfHostApp'
 version = '1.0'
 
 repositories {
@@ -57,6 +57,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.7.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.7.0'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
+	implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.6.10'
 	//implementation group: 'io.netty', name: 'netty-resolver-dns-native-macos', version: '4.1.87.Final'
 
 	//runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.87.Final:osx-x86_64")

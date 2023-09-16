@@ -21,7 +21,10 @@ public class ProductRulesExecutor {
 
     @PostConstruct
     public void init() {
+        // doExecute();
+    }
 
+    public void doExecute() {
         Product product = new Product("apple");
         product.setCurrentPrice(new BigDecimal("160.01"));
 
@@ -35,6 +38,5 @@ public class ProductRulesExecutor {
         productRuleEngine.doExecute(facts);
         // productRuleEngine.doCheck(facts);
 
-        log.info("rule execution map: {}", productRuleEngine.getRuleExecutionMap());
     }
 }

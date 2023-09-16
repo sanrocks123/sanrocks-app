@@ -21,6 +21,11 @@ public class CompanyReadServiceImpl implements GraphQLQueryResolver, CompanyRead
     private final CompanyRepository companyRepository;
     private final HttpServletRequest httpServletRequest;
 
+    /**
+     * @param id
+     * @return
+     */
+    @Override
     public Company getCompanyById(final String id) {
         log.info("http request: {}", httpServletRequest.getRequestURI());
 
@@ -33,8 +38,17 @@ public class CompanyReadServiceImpl implements GraphQLQueryResolver, CompanyRead
         }
 
         log.info("getCompanyById, result: [{}]", result.get());
-        log.info("getCompanyById, result: [{}]", result.get());
-
         return result.get();
+    }
+
+    /**
+     * @param company
+     * @return
+     */
+    @Override
+    public Company getCompany(final Company company) {
+        log.info("getCompany, company: {}", company);
+
+        return getCompanyById(company.getId());
     }
 }

@@ -9,13 +9,23 @@ type Company {
     # the phone number
     phoneNumber: String
 
-
     description: String
 
     @deprecated
     url: String
     tweet: Tweet
 
+    extension: Extension
+}
+
+type Extension {
+    ruleTracer: [RuleTracer]
+}
+
+type RuleTracer {
+    fieldName: String
+    successful: [String]
+    failed: [String]
 }
 
 #tweet composition

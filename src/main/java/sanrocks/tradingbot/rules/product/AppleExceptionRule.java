@@ -21,6 +21,6 @@ public class AppleExceptionRule extends ProductBaseRules {
     @Action
     public void then(@Fact("product") Product product) {
         log.info("AppleExceptionRule, exception rule executed");
-        throw new RuntimeException("Rule apply failure");
+        // throw new RuntimeException("Rule apply failure");
     }
 }

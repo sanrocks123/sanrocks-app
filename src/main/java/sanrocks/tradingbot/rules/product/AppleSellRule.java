@@ -36,6 +36,6 @@ public class AppleSellRule extends ProductBaseRules {
 
         product.setTrades(List.of(trade));
 
-        log.info("when_targetSellPriceMatched_then_applyTrades : {}", product.toString(4));
+        log.info("when_targetSellPriceMatched_then_applyTrades : {}", product.toString());
     }
 }

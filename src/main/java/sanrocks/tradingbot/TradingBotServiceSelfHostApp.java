@@ -1,5 +1,5 @@
 /* (C) 2023 */
-package sanrocks.tradingbot.main;
+package sanrocks.tradingbot;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
@@ -18,10 +19,11 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
  * @email : sanrocks123@gmail.com
  */
 @Slf4j
-// @EnableElasticsearchRepositories(basePackages = "sanrocks")
-@EnableMongoRepositories(basePackages = "sanrocks")
-@EnableReactiveMongoRepositories(basePackages = "sanrocks")
-@SpringBootApplication(scanBasePackages = "sanrocks")
+// @EnableElasticsearchRepositories
+@EnableAspectJAutoProxy
+@EnableMongoRepositories
+@EnableReactiveMongoRepositories
+@SpringBootApplication
 public class TradingBotServiceSelfHostApp {
 
     private static final List<String> SUPPORTED_PROFILES = Arrays.asList("localhost", "dev");

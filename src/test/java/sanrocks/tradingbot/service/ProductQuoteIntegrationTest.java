@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import sanrocks.tradingbot.TradingBotServiceSelfHostApp;
 import sanrocks.tradingbot.domain.ProductQuoteEvent;
-import sanrocks.tradingbot.main.TradingBotServiceSelfHostApp;
 
 @Disabled
 @Slf4j

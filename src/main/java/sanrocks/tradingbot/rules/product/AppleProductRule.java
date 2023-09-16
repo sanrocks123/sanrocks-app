@@ -32,6 +32,6 @@ public class AppleProductRule extends ProductBaseRules {
 
         product.setBuyPrice(buyPrice);
 
-        log.info("when_applyProductMatched_then_applySellPricingLimits {}", product.toString(4));
+        log.info("when_applyProductMatched_then_applySellPricingLimits {}", product.toString());
     }
 }
