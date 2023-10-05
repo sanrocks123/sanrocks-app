@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import sanrocks.tradingbot.domain.graph.GraphBaseAttributes;
+import sanrocks.tradingbot.domain.graph.GraphExtension;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -18,7 +18,7 @@ import sanrocks.tradingbot.domain.graph.GraphBaseAttributes;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Company extends GraphBaseAttributes {
+public class Company extends GraphExtension {
 
     @Id private String id;
     private String name;

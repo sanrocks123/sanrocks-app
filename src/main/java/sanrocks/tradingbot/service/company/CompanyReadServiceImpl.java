@@ -2,10 +2,11 @@
 package sanrocks.tradingbot.service.company;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import sanrocks.tradingbot.repository.CompanyRepository;
 public class CompanyReadServiceImpl implements GraphQLQueryResolver, CompanyReadService {
 
     private final CompanyRepository companyRepository;
-    private final HttpServletRequest httpServletRequest;
+    // private final HttpServletRequest httpServletRequest;
 
     /**
      * @param id
@@ -27,7 +28,7 @@ public class CompanyReadServiceImpl implements GraphQLQueryResolver, CompanyRead
      */
     @Override
     public Company getCompanyById(final String id) {
-        log.info("http request: {}", httpServletRequest.getRequestURI());
+        //  log.info("http request: {}", httpServletRequest.getRequestURI());
 
         Optional<Company> result = companyRepository.findById(id);
 
@@ -46,9 +47,10 @@ public class CompanyReadServiceImpl implements GraphQLQueryResolver, CompanyRead
      * @return
      */
     @Override
-    public Company getCompany(final Company company) {
+    public List<Company> getCompany(final Company company) {
         log.info("getCompany, company: {}", company);
 
-        return getCompanyById(company.getId());
+        return Collections.emptyList();
+        // return companyRepository.findAll();
     }
 }

@@ -3,7 +3,6 @@ package sanrocks.tradingbot.config;
 
 import static org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,7 @@ import java.util.Optional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
 import org.jeasy.rules.api.RuleListener;
@@ -23,11 +23,11 @@ import org.jeasy.rules.core.DefaultRulesEngine;
 import org.jeasy.rules.support.composite.UnitRuleGroup;
 import org.json.JSONObject;
 import org.springframework.web.context.request.RequestContextHolder;
-import sanrocks.tradingbot.domain.graph.GraphBaseAttributes;
+import sanrocks.tradingbot.domain.graph.GraphExtension;
 import sanrocks.tradingbot.domain.graph.RuleTracer;
 
-@Slf4j
 @Getter
+@Slf4j
 @RequiredArgsConstructor
 public final class RuleEngineConfig {
 
@@ -74,138 +74,81 @@ public final class RuleEngineConfig {
 
         xRules.forEach(rules::register);
 
+        String ruleGroupName =
+                xRules.size() == 1
+                        ? xRules.get(0).getClass().getSimpleName() + "Node"
+                        : xRules.get(0).getClass().getSuperclass().getSimpleName() + "Node";
+
         AbstractRulesEngine rulesEngine = new DefaultRulesEngine();
+
         rulesEngine.registerRuleListener(
                 new RuleListener() {
 
                     @Override
                     public void onSuccess(final Rule rule, final Facts facts) {
-                        logRule(ruleExecutionMap, "successful", rule.getName());
+                        getRuleTracer().getSuccessful().add(rule.getName());
                     }
 
                     @Override
                     public void onFailure(Rule rule, Facts facts, Exception exception) {
-                        logRule(
-                                ruleExecutionMap,
-                                "failed",
-                                String.format(
-                                        "%s : %s",
-                                        rule.getName(), exception.getCause().getMessage()));
+                        getRuleTracer()
+                                .getFailed()
+                                .add(
+                                        String.format(
+                                                "%s : %s",
+                                                rule.getName(),
+                                                ExceptionUtils.getMessage(exception.getCause())));
                     }
                 });
 
         rulesEngine.registerRulesEngineListener(
                 new RulesEngineListener() {
+
+                    @Override
+                    public void beforeEvaluate(Rules rules, Facts facts) {
+                        log.info("beforeEvaluate, groupName: {}", ruleGroupName);
+                        getRuleTracer().getSuccessful().add(ruleGroupName);
+                    }
+
                     @Override
                     public void afterExecute(final Rules rules, final Facts facts) {
-
-                        Map<String, List<String>> prevContextBoundRuleExecutionMap =
-                                (Map)
-                                        RequestContextHolder.getRequestAttributes()
-                                                .getAttribute("ruleExecutionMap", SCOPE_REQUEST);
-
-                        if (Objects.isNull(prevContextBoundRuleExecutionMap)) {
-                            setContextAttribute(ruleExecutionMap);
-
-                        } else {
-                            prevContextBoundRuleExecutionMap.forEach(
-                                    (k, v) -> {
-                                        ruleExecutionMap.computeIfPresent(
-                                                k,
-                                                (kk, vv) -> {
-                                                    vv.addAll(
-                                                            prevContextBoundRuleExecutionMap.get(
-                                                                    k));
-                                                    return vv;
-                                                });
-                                    });
-
-                            setContextAttribute(ruleExecutionMap);
-                        }
-
-                        log.info(
-                                "ruleEngineListener, afterExecute, requestContextHolder,"
-                                        + " ruleExecutionMap : [{}]",
-                                RequestContextHolder.getRequestAttributes()
-                                        .getAttribute("ruleExecutionMap", SCOPE_REQUEST));
-
-                        Object object =
-                                RequestContextHolder.getRequestAttributes()
-                                        .getAttribute("objectName", SCOPE_REQUEST);
-
-                        if (Objects.nonNull(object) && object instanceof GraphBaseAttributes) {
-                            GraphBaseAttributes graphBaseAttributes = (GraphBaseAttributes) object;
-
-                            String fieldName =
-                                    RequestContextHolder.getRequestAttributes()
-                                            .getAttribute("fieldName", SCOPE_REQUEST)
-                                            .toString();
-
-                            Optional<RuleTracer> optionalRuleTracer =
-                                    graphBaseAttributes.getExtension().getRuleTracer().stream()
-                                            .filter(
-                                                    e ->
-                                                            e.getFieldName()
-                                                                    .equalsIgnoreCase(fieldName))
-                                            .findFirst();
-
-                            RuleTracer ruleTracer = null;
-
-                            if (optionalRuleTracer.isEmpty()) {
-                                ruleTracer = new RuleTracer();
-                                ruleTracer.setFieldName(fieldName);
-                                graphBaseAttributes.getExtension().getRuleTracer().add(ruleTracer);
-                            } else {
-                                ruleTracer = optionalRuleTracer.get();
-                            }
-
-                            updateSuccessRules(ruleTracer, ruleExecutionMap);
-                            updateFailedRules(ruleTracer, ruleExecutionMap);
-                        }
-
-                        ruleExecutionMap.clear();
+                        log.info("afterExecute, groupName: {}", ruleGroupName);
+                        getRuleTracer().getSuccessful().add(ruleGroupName);
                     }
                 });
 
         return new RuleEngineConfig(rules, rulesEngine);
     }
 
-    private static void updateFailedRules(
-            final RuleTracer ruleTracer, final Map<String, List<String>> ruleExecutionMap) {
-        ruleExecutionMap.computeIfPresent(
-                "failed",
-                (k, v) -> {
-                    ruleTracer.getFailed().addAll(v);
-                    return v;
-                });
-    }
+    private static RuleTracer getRuleTracer() {
+        Object object =
+                RequestContextHolder.getRequestAttributes()
+                        .getAttribute("objectName", SCOPE_REQUEST);
 
-    private static void updateSuccessRules(
-            final RuleTracer ruleTracer, final Map<String, List<String>> ruleExecutionMap) {
-        ruleExecutionMap.computeIfPresent(
-                "successful",
-                (k, v) -> {
-                    ruleTracer.getSuccessful().addAll(v);
-                    return v;
-                });
-    }
+        if (Objects.nonNull(object) && object instanceof GraphExtension) {
+            GraphExtension graphExtension = (GraphExtension) object;
 
-    private static void setContextAttribute(final Map<String, List<String>> ruleExecutionMap) {
-        RequestContextHolder.currentRequestAttributes()
-                .setAttribute("ruleExecutionMap", ruleExecutionMap, SCOPE_REQUEST);
-    }
+            String fieldName =
+                    RequestContextHolder.getRequestAttributes()
+                            .getAttribute("fieldName", SCOPE_REQUEST)
+                            .toString();
 
-    private static void logRule(
-            final Map<String, List<String>> ruleExecutionMap,
-            final String key,
-            final String ruleDescription) {
+            Optional<RuleTracer> optionalRuleTracer =
+                    graphExtension.getExtension().getRuleTracer().stream()
+                            .filter(e -> e.getFieldName().equalsIgnoreCase(fieldName))
+                            .findFirst();
 
-        ruleExecutionMap.computeIfAbsent(key, v -> new ArrayList<>());
-        ruleExecutionMap.computeIfPresent(
-                key,
-                (k, v) -> {
-                    v.add(ruleDescription);
-                    return v;
-                });
+            RuleTracer ruleTracer = null;
+
+            if (optionalRuleTracer.isEmpty()) {
+                ruleTracer = new RuleTracer();
+                ruleTracer.setFieldName(fieldName);
+                graphExtension.getExtension().getRuleTracer().add(ruleTracer);
+            } else {
+                ruleTracer = optionalRuleTracer.get();
+            }
+            return ruleTracer;
+        }
+        return null;
     }
 }

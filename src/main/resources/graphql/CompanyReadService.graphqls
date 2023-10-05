@@ -19,7 +19,8 @@ type Company {
 }
 
 type Extension {
-    ruleTracer: [RuleTracer]
+    ruleTracer: [RuleTracer],
+
 }
 
 type RuleTracer {

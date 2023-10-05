@@ -10,6 +10,7 @@ brew services start metricbeat
 elasticsearch -d
 kibana --silent -d
 
+# admin/pass
 mongo-express --admin --url mongodb://localhost:27017 &
 
 brew services list

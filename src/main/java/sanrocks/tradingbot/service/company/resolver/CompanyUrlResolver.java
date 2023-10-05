@@ -20,8 +20,9 @@ public class CompanyUrlResolver implements GraphQLResolver<Company> {
     public String getUrl(Company company) {
 
         log.info("getUrl, companyId : [{}]", company.getId());
+
         productRulesExecutor.doExecute();
-        productRulesExecutor.doExecute();
+        productRulesExecutor.doExecuteSingleRule();
 
         return "http://base:port/v1/companies";
     }

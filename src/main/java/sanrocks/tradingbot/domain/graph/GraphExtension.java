@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GraphBaseAttributes {
+public class GraphExtension {
 
     private Extension extension = new Extension();
 }

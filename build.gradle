@@ -57,11 +57,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.7.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.7.0'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
-	implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.6.10'
+	implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.20.1'
 	//implementation group: 'io.netty', name: 'netty-resolver-dns-native-macos', version: '4.1.87.Final'
 
 	//runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.87.Final:osx-x86_64")
-	implementation group: 'io.netty', name: 'netty-resolver-dns-native-macos', version: '4.1.87.Final', classifier: 'osx-aarch_64'
+	//implementation group: 'io.netty', name: 'netty-resolver-dns-native-macos', version: '4.1.87.Final', classifier: 'osx-aarch_64'
 
 	//implementation 'org.springframework.data:spring-data-elasticsearch:4.0.0.RELEASE'
 
@@ -79,7 +79,7 @@ dependencies {
 
 	testImplementation 'junit:junit:4.13.2'
 	testImplementation "org.jmockit:jmockit:1.49"
-	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
 	testImplementation "org.springframework.boot:spring-boot-starter-test:$springboot"
 }
 

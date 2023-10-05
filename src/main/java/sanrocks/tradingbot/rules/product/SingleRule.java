@@ -10,8 +10,8 @@ import sanrocks.tradingbot.domain.Product;
 
 @Slf4j
 @Component
-@Rule(name = "AppleExceptionRule", description = "AppleExceptionRule", priority = 2)
-public class AppleExceptionRule extends ProductBaseRules {
+@Rule(name = "SingleRule", description = "SingleRule", priority = 2)
+public class SingleRule {
 
     @Condition
     public boolean when(@Fact("product") Product product) {
@@ -20,7 +20,6 @@ public class AppleExceptionRule extends ProductBaseRules {
 
     @Action
     public void then(@Fact("product") Product product) {
-        log.info("AppleExceptionRule, exception rule executed");
-        // throw new RuntimeException("Account no does not exists");
+        log.info("SingleRule, exception rule executed");
     }
 }

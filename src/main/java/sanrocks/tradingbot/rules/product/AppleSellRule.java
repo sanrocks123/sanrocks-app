@@ -10,6 +10,7 @@ import org.jeasy.rules.annotation.Rule;
 import org.springframework.stereotype.Component;
 import sanrocks.tradingbot.domain.Product;
 import sanrocks.tradingbot.domain.Trade;
+import sanrocks.tradingbot.rules.ProductRulesExecutor;
 
 @Slf4j
 @Component
@@ -28,13 +29,17 @@ public class AppleSellRule extends ProductBaseRules {
     }
 
     @Action
-    public void applyTrades(@Fact("product") Product product) {
+    public void applyTrades(
+            @Fact("product") Product product,
+            @Fact("productRulesExecutor") ProductRulesExecutor productRulesExecutor) {
         Trade trade = new Trade();
         trade.setId("aa");
         trade.setPositionId("positionId");
         trade.setPositionType("SELL");
 
         product.setTrades(List.of(trade));
+
+        new Thread(productRulesExecutor::doExecuteSingleRule).start();
 
         log.info("when_targetSellPriceMatched_then_applyTrades : {}", product.toString());
     }

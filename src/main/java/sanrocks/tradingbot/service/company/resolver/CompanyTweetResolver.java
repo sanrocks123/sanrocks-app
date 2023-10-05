@@ -28,8 +28,8 @@ public class CompanyTweetResolver implements GraphQLResolver<Company> {
         log.info("getTweet, companyId: [{}], tweet: {}", company.getId(), tweet);
 
         productRulesExecutor.doExecute();
-        productRulesExecutor.doExecute();
-        productRulesExecutor.doExecute();
+        // productRulesExecutor.doExecute();
+        // productRulesExecutor.doExecute();
 
         return tweet;
     }

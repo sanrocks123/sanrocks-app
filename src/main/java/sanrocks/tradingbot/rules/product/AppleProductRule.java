@@ -9,6 +9,7 @@ import org.jeasy.rules.annotation.Fact;
 import org.jeasy.rules.annotation.Rule;
 import org.springframework.stereotype.Component;
 import sanrocks.tradingbot.domain.Product;
+import sanrocks.tradingbot.rules.ProductRulesExecutor;
 
 @Slf4j
 @Component
@@ -28,9 +29,12 @@ public class AppleProductRule extends ProductBaseRules {
 
     @Action
     public void applySellPricingLimit(
-            @Fact("product") Product product, @Fact("buyPrice") BigDecimal buyPrice) {
+            @Fact("product") Product product,
+            @Fact("buyPrice") BigDecimal buyPrice,
+            @Fact("productRulesExecutor") ProductRulesExecutor productRulesExecutor) {
 
         product.setBuyPrice(buyPrice);
+        // productRulesExecutor.doExecuteSingleRule();
 
         log.info("when_applyProductMatched_then_applySellPricingLimits {}", product.toString());
     }
