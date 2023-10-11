@@ -88,6 +88,7 @@ test {
 	maxParallelForks = Runtime.runtime.availableProcessors()
 	testLogging {
 		events "passed", "skipped", "failed"
+		showStandardStreams = true
 	}
 }
 

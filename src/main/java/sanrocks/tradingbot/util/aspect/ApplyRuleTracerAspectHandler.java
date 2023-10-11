@@ -10,7 +10,6 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import sanrocks.tradingbot.domain.graph.GraphExtension;
 
@@ -31,12 +30,10 @@ public class ApplyRuleTracerAspectHandler {
                     "failed to find any method input args matching GraphBaseAttributes instance");
         }
 
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        RequestContextHolder.setRequestAttributes(requestAttributes, true);
-
+        RequestContextHolder.setRequestAttributes(
+                RequestContextHolder.getRequestAttributes(), true);
         RequestContextHolder.getRequestAttributes()
                 .setAttribute("fieldName", jp.getSignature().getName(), SCOPE_REQUEST);
-
         RequestContextHolder.getRequestAttributes()
                 .setAttribute("objectName", object.get(), SCOPE_REQUEST);
     }
