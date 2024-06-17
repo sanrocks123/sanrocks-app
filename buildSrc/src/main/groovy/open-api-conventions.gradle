@@ -1,0 +1,13 @@
+plugins {
+    id 'groovy'
+    //id "org.springdoc.openapi-gradle-plugin"
+}
+
+dependencies {
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9';
+}
+/**
+openApi {
+    apiDocsUrl.set("http://localhost:1000/trading-bot/v3/api-docs")
+}
+ */

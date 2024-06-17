@@ -1,0 +1,14 @@
+plugins {
+    id("non-reactive-conventions")
+    id("reactive-conventions")
+    id("java-spotless-conventions")
+    id("open-api-conventions")
+    id("graphql-client-conventions")
+}
+
+apply plugin: 'application'
+
+application {
+    mainClassName = 'sanrocks.tradingbot.TradingBotServiceSelfHostApp'
+    version = '1.0'
+}

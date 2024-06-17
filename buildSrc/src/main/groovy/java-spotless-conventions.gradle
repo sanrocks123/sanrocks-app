@@ -1,0 +1,24 @@
+plugins {
+    id 'groovy'
+    id "com.diffplug.spotless"
+}
+
+spotless {
+    java {
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat('1.22.0').aosp().reflowLongStrings()
+        formatAnnotations()
+    }
+
+    json {
+        target 'src/**/*.json'
+        gson()
+                .indentWithSpaces(2) // optional: specify the number of spaces to use
+                .sortByKeys()        // optional: sort JSON by its keys
+                .escapeHtml()        // optional: escape HTML in values
+                .version('2.8.1')    // optional: specify version
+    }
+}
+
+compileJava.dependsOn spotlessApply

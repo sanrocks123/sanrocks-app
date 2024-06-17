@@ -1,0 +1,13 @@
+plugins {
+    id 'groovy'
+    id "java-conventions"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-webflux:$springboot"
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb-reactive:$springboot"
+}

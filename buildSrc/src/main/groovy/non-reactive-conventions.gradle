@@ -1,0 +1,29 @@
+plugins {
+    id 'groovy'
+    id "java-conventions"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation ("org.springframework.boot:spring-boot-starter-web:$springboot")
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb:$springboot"
+
+    implementation "org.springframework:spring-websocket:$spring"
+    implementation "org.springframework:spring-messaging:$spring"
+
+    implementation 'org.aspectj:aspectjweaver:1.9.22.1'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+
+    //implementation group: 'io.netty', name: 'netty-resolver-dns-native-macos', version: '4.1.87.Final'
+
+    //runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.87.Final:osx-x86_64")
+    //implementation group: 'io.netty', name: 'netty-resolver-dns-native-macos', version: '4.1.87.Final', classifier: 'osx-aarch_64'
+
+    //implementation 'org.springframework.data:spring-data-elasticsearch:4.0.0.RELEASE'
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springboot"
+}

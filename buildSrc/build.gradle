@@ -1,0 +1,17 @@
+
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+repositories {
+    gradlePluginPortal()
+    mavenCentral()
+}
+
+// used only for plugin versions
+
+dependencies {
+
+    implementation("org.springdoc.openapi-gradle-plugin:org.springdoc.openapi-gradle-plugin.gradle.plugin:1.7.0")
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:6.25.0")
+}

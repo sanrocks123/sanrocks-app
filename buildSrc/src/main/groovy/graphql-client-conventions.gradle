@@ -1,0 +1,48 @@
+plugins {
+    id 'groovy'
+    //id "com.apollographql.apollo3"
+    //id "com.graphql_java_generator.graphql-gradle-plugin"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //implementation("com.apollographql.apollo3:apollo-runtime:3.7.4")
+    //implementation "com.graphql-java-generator:graphql-java-client-runtime:${graphQLPluginVersion}"
+
+    implementation 'com.graphql-java:graphql-java-tools:5.2.4'
+    implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
+}
+
+/**
+ apollo {
+ service("trading-bot") {
+ setPackageName("com.sanrocks.graphql")
+ }
+ }
+
+ generateClientCode {
+ dependsOn generateGraphQLSchema
+ packageName "com.tradingbot.graphql.generated"
+ schemaFileFolder "build/generated/resources/schema"
+ schemaFilePattern "*.graphqls"
+ }
+
+ generateGraphQLSchema {
+ dependsOn clean
+ schemaFileFolder "src/main/resources/graphql"
+ schemaFilePattern "*.graphqls"
+ targetFolder "build/generated/resources/schema"
+ targetSchemaFileName "trading-bot-schema.graphqls"
+ }
+
+ generatePojo {
+ dependsOn generateGraphQLSchema
+ packageName "com.tradingbot.graphql.generated"
+ schemaFileFolder "build/generated/resources/schema"
+ schemaFilePattern "*.graphqls"
+ }
+
+ */

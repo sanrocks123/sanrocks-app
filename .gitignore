@@ -9,7 +9,10 @@ bin*
 .setting*
 .classpath*
 .idea
+*.idea
 .DS_store
+
+**/build
 
 # Log file
 *.log
