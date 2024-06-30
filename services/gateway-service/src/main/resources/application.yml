@@ -10,15 +10,21 @@ spring:
         - id: trading-bot
           uri: lb://trading-bot-service
           predicates:
-            - Path=/trading-bot/**
+            - Path=/trading/**
+          filters:
+            - RewritePath=/trading/?(?<segment>.*), /trading-bot/$\{segment}
         - id: eureka
           uri: lb://discovery-service
           predicates:
-            - Path=/eureka/**
+            - Path=/discovery/**
+          filters:
+            - RewritePath=/discovery/?(?<segment>.*), /eureka/$\{segment}
         - id: standing-service
           uri: lb://standing-service
           predicates:
-            - Path=/standing-service/**
+            - Path=/standing/**
+          filters:
+            - RewritePath=/standing/?(?<segment>.*), /standing-service/$\{segment}
 
 management:
   endpoints:
