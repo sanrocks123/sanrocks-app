@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import lombok.Data;
 import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
@@ -33,8 +31,8 @@ public class Product implements Serializable {
 
     @Id private String productId;
 
-    @NotBlank
-    @Size(min = 0, max = 20)
+    // @NotBlank
+    // @Size(min = 0, max = 20)
     private String productName;
 
     private BigDecimal currentPrice;

@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: trading-bot
+          uri: lb://trading-bot-service
+          predicates:
+            - Path=/trading-bot/**
+        - id: eureka
+          uri: lb://discovery-service
+          predicates:
+            - Path=/eureka/**
+        - id: standing-service
+          uri: lb://standing-service
+          predicates:
+            - Path=/standing-service/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: "${EUREKA_URI:http://localhost:8761/eureka}"
+  instance:
+    preferIpAddress: true
+
+logging:
+  level:
+    org:
+      springframework: "DEBUG"

@@ -11,7 +11,9 @@
         <module name="sanrocks.services.trading-service.test" />
         <module name="sanrocks.services.trading-service.main" />
         <module name="sanrocks.apps.dsa-problem-solving.test" />
+        <module name="sanrocks.services.standing-service.test" />
         <module name="sanrocks.apps.dsa-problem-solving.main" />
+        <module name="sanrocks.services.standing-service.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="21" />

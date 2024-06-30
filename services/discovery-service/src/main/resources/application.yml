@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: discovery-service
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+
+logging:
+  level:
+    org:
+      springframework: "DEBUG"

@@ -2,8 +2,6 @@
 package sanrocks.tradingbot.config;
 
 import com.oembedler.moon.graphql.boot.GraphQLJavaToolsAutoConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +18,6 @@ import org.springframework.web.client.RestTemplate;
 @ImportAutoConfiguration(classes = {GraphQLJavaToolsAutoConfiguration.class})
 @Configuration
 public class TradingBotAppConfig {
-    private final Logger log = LoggerFactory.getLogger(getClass());
 
     /**
      * @return

@@ -9,6 +9,8 @@ spring:
     name: "trading-bot-service"
     title: "Trading Bot Service"
     version: 1.0
+  profiles:
+    active: "${ENV:dev}"
   banner:
     location: "classpath:banner.txt"
   data:
@@ -44,3 +46,10 @@ graphql:
     enabled: true
   #tools:
     #schemaLocationPattern: "**/*.graphqls"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: "${EUREKA_URI:http://localhost:8761/eureka}"
+  instance:
+    preferIpAddress: false

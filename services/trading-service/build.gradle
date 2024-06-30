@@ -12,3 +12,4 @@ application {
     mainClassName = 'sanrocks.tradingbot.TradingBotServiceSelfHostApp'
     version = '1.0'
 }
+

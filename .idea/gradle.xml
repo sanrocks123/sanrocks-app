@@ -24,6 +24,9 @@
             <option value="$PROJECT_DIR$/apps/dsa-problem-solving" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/services" />
+            <option value="$PROJECT_DIR$/services/discovery-service" />
+            <option value="$PROJECT_DIR$/services/gateway-service" />
+            <option value="$PROJECT_DIR$/services/standing-service" />
             <option value="$PROJECT_DIR$/services/trading-service" />
           </set>
         </option>

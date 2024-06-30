@@ -1,0 +1,19 @@
+
+plugins {
+
+}
+
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:$springCloud"
+}
+
+application {
+    mainClassName = 'com.sanrocks.EurekaServerApplication'
+    version = '1.0'
+}

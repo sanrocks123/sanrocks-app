@@ -1,4 +1,14 @@
-
 rootProject.name = 'sanrocks'
 
-include("services:trading-service", "apps:dsa-problem-solving")
+List<String> apps = List.of(
+        "apps:dsa-problem-solving");
+
+List<String> services = List.of(
+        "services:trading-service",
+        "services:discovery-service",
+        "services:gateway-service",
+        "services:standing-service")
+
+List.of(apps,services).stream().forEach {
+    include(it)
+}

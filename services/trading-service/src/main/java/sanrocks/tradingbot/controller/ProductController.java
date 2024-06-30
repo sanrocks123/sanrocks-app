@@ -13,12 +13,17 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.stream.Collectors;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import sanrocks.tradingbot.domain.Product;
 import sanrocks.tradingbot.repository.ProductRepository;
@@ -79,7 +84,7 @@ public class ProductController {
      */
     @GetMapping("/all")
     @Operation(summary = "API to list products")
-    public ResponseEntity<List<Product>> getAllProducts(@ParameterObject Pageable pageable) {
+    public ResponseEntity<List<Product>> getAllProducts(Pageable pageable) {
         return new ResponseEntity<>(
                 productTrades.getProducts().entrySet().stream()
                         .map(e -> e.getValue())
