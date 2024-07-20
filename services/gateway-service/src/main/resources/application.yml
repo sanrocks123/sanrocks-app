@@ -7,18 +7,21 @@ spring:
         locator:
           enabled: true
       routes:
+
         - id: trading-bot
           uri: lb://trading-bot-service
           predicates:
             - Path=/trading/**
           filters:
             - RewritePath=/trading/?(?<segment>.*), /trading-bot/$\{segment}
+
         - id: eureka
           uri: lb://discovery-service
           predicates:
             - Path=/discovery/**
           filters:
             - RewritePath=/discovery/?(?<segment>.*), /eureka/$\{segment}
+
         - id: standing-service
           uri: lb://standing-service
           predicates:
@@ -43,3 +46,21 @@ logging:
   level:
     org:
       springframework: "DEBUG"
+
+server:
+  servlet:
+    context-path:
+  port: 8080
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: Gateway Service
+      - url: /trading/v3/api-docs
+        name: Trading Service

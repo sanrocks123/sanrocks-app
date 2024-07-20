@@ -69,8 +69,8 @@ public final class RuleEngineConfig {
         Map<String, List<String>> ruleExecutionMap = new HashMap<>();
 
         UnitRuleGroup unitRuleGroup = new UnitRuleGroup("product-sell-flow");
-        xRules.forEach(unitRuleGroup::addRule);
-        // rules.register(unitRuleGroup);
+
+        xRules.forEach(unitRuleGroup::addRule);        // rules.register(unitRuleGroup);
 
         xRules.forEach(rules::register);
 
@@ -78,7 +78,6 @@ public final class RuleEngineConfig {
                 xRules.size() == 1
                         ? xRules.get(0).getClass().getSimpleName() + "Node"
                         : xRules.get(0).getClass().getSuperclass().getSimpleName() + "Node";
-
         AbstractRulesEngine rulesEngine = new DefaultRulesEngine();
 
         rulesEngine.registerRuleListener(
